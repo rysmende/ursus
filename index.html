@@ -37,11 +37,14 @@
       color: var(--ink);
       line-height: 1.6;
       overflow-x: hidden;
-      background-image:
+    }
+    /* Wood-grain glow on its own fixed GPU layer (no scroll repaint). */
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
         radial-gradient(1100px 620px at 82% -8%, rgba(210,154,60,.12), transparent 60%),
         radial-gradient(900px 560px at -12% 26%, rgba(122,82,48,.18), transparent 62%),
         radial-gradient(1000px 700px at 50% 120%, rgba(138,147,86,.07), transparent 60%);
-      background-attachment: fixed;
     }
     h1, h2, h3, .brand { font-family: "Unbounded", "Manrope", sans-serif; }
     a { color: inherit; text-decoration: none; }
@@ -105,9 +108,9 @@
     .stat .n { font-family: "Unbounded"; font-weight: 800; font-size: clamp(24px,4vw,30px); color: var(--walnut); }
     .stat .l { font-size: 13px; color: var(--muted); font-weight: 600; }
 
-    /* ---------- Traveling 3D cheese layer ---------- */
+    /* ---------- Traveling 3D cheese layer (sits behind all content) ---------- */
     #cheeseLayer {
-      position: fixed; inset: 0; z-index: 5; pointer-events: none;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       opacity: 1; transition: opacity .45s ease; will-change: opacity;
     }
     #cheese3d { position: absolute; inset: 0; }
@@ -141,7 +144,7 @@
     .sec-head p { color: var(--muted); max-width: 620px; font-size: clamp(15px,1.8vw,17px); }
 
     /* ---------- Catalog ---------- */
-    #products { background: linear-gradient(180deg, var(--paper), var(--paper-2)); }
+    #products { background: linear-gradient(180deg, rgba(22,15,8,.80), rgba(30,20,11,.86)); }
     .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
     .filters button {
       font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; padding: 10px 19px;
@@ -155,7 +158,7 @@
     .card .ph { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--card-2); }
     .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
     .card:hover .ph img { transform: scale(1.07); }
-    .card .tag { position: absolute; top: 12px; left: 12px; background: rgba(12,8,4,.66); backdrop-filter: blur(6px); color: var(--gold-soft); font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(236,197,120,.22); }
+    .card .tag { position: absolute; top: 12px; left: 12px; background: rgba(12,8,4,.82); color: var(--gold-soft); font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(236,197,120,.22); }
     .card .body { padding: 17px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
     .card h3 { font-family: "Manrope"; font-weight: 700; font-size: 18px; color: var(--walnut); }
     .card .desc { color: var(--muted); font-size: 14px; flex: 1; }
@@ -181,7 +184,7 @@
     .feature span { font-size: 13.5px; color: var(--muted); }
 
     /* ---------- Contact ---------- */
-    #contact { background: var(--espresso); color: var(--ink); }
+    #contact { background: rgba(15,10,5,.84); color: var(--ink); }
     #contact .eyebrow { color: var(--gold-soft); }
     #contact .sec-head h2 { color: #fff; }
     #contact .sec-head p { color: #cdbda3; }
@@ -584,10 +587,10 @@
     // cheese tucked into negative space so it never sits on top of text.
     const WP = [
       { sel:".hero",    sx:.72, sy:.46, scale:1.00, tilt:-.50, op:1.00 },
-      { sel:"#products",sx:.88, sy:.20, scale:.46, tilt:-.28, op:.55 },
-      { sel:"#about",   sx:.15, sy:.54, scale:.60, tilt:-.62, op:.62 },
-      { sel:"#quality", sx:.86, sy:.40, scale:.46, tilt:-.30, op:.55 },
-      { sel:"#contact", sx:.50, sy:.22, scale:.56, tilt:-.70, op:.70 }
+      { sel:"#products",sx:.82, sy:.30, scale:.62, tilt:-.28, op:1.00 },
+      { sel:"#about",   sx:.22, sy:.52, scale:.70, tilt:-.62, op:1.00 },
+      { sel:"#quality", sx:.80, sy:.44, scale:.62, tilt:-.30, op:1.00 },
+      { sel:"#contact", sx:.50, sy:.40, scale:.78, tilt:-.70, op:1.00 }
     ];
     let anchors = [];
     function measure() {
@@ -689,8 +692,8 @@
       const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
       camera.position.set(0, 0, camZ); camera.lookAt(0, 0, 0);
 
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
       host.appendChild(renderer.domElement);
       document.getElementById("cheeseLayer").classList.add("has3d");
 
@@ -739,23 +742,29 @@
         return { x: ndcX * vW / 2, y: ndcY * vH / 2 };
       }
 
-      let target = { sx:.72, sy:.46, scale:1, tilt:-.5 }, scrollPos = 0, idle = 0;
+      let target = { sx:.72, sy:.46, scale:1, tilt:-.5 }, scrollPos = 0, settleFrames = 0;
       const cur = { x: 0, y: 0, s: 1, tx: -.5 };
-      window.__cheese3d = { update: (t, y) => { target = t; scrollPos = y; } };
+      // a scroll update "wakes" the loop; it sleeps once motion has settled
+      window.__cheese3d = { update: (t, y) => { target = t; scrollPos = y; settleFrames = 14; } };
 
       function frame() {
+        requestAnimationFrame(frame);
+        if (document.hidden) return;                      // never render in a background tab
+
         const w = screenToWorld(target.sx, target.sy);
-        cur.x  += (w.x - cur.x) * 0.09;
-        cur.y  += (w.y - cur.y) * 0.09;
-        cur.s  += (target.scale - cur.s) * 0.09;
-        cur.tx += (target.tilt - cur.tx) * 0.09;
+        const dx = w.x - cur.x, dy = w.y - cur.y, ds = target.scale - cur.s, dt = target.tilt - cur.tx;
+        cur.x += dx * 0.09; cur.y += dy * 0.09; cur.s += ds * 0.09; cur.tx += dt * 0.09;
+
+        // render only while easing or just after a scroll; otherwise idle the GPU
+        const moving = Math.abs(dx) + Math.abs(dy) + Math.abs(ds) + Math.abs(dt) > 1e-4;
+        if (!moving && settleFrames <= 0) return;
+        if (settleFrames > 0) settleFrames--;
+
         holder.position.set(cur.x, cur.y, 0);
         holder.scale.setScalar(cur.s);
         tilt.rotation.x = cur.tx;
-        idle += prefersReduce ? 0 : 0.0016;
-        spin.rotation.y = idle + scrollPos * 0.0045;     // turns as you scroll
+        spin.rotation.y = scrollPos * 0.0045;             // turns as you scroll
         renderer.render(scene, camera);
-        requestAnimationFrame(frame);
       }
       frame();
     }
