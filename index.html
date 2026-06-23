@@ -1,103 +1,591 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ursus.kg</title>
+  <title>URSUS — Молочный завод · Беловодск, Кыргызстан</title>
+  <meta name="description" content="URSUS — производство сыра, молока, масла и сливок в Беловодске, Чуйская область, Кыргызстан. Натуральные молочные продукты по традиционным рецептам." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f1115;
-      --card: #181b22;
-      --accent: #5eead4;
-      --text: #e6e9ef;
-      --muted: #8b93a7;
+      --cream: #fdf8ef;
+      --cream-2: #f6edda;
+      --ink: #221a10;
+      --muted: #7a6f5d;
+      --gold: #e9a915;
+      --gold-deep: #c8870a;
+      --gold-soft: #f7d27a;
+      --green: #3f6f3a;
+      --card: #fffdf8;
+      --line: #ece2cc;
+      --shadow: 0 24px 60px rgba(70, 50, 10, 0.14);
+      --radius: 22px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: radial-gradient(1200px 600px at 50% -10%, #1b2030, var(--bg));
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100%;
-      padding: 24px;
+      font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
+    h1, h2, h3, .brand { font-family: "Unbounded", "Manrope", sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap { width: min(1180px, 92vw); margin: 0 auto; }
+    section { padding: 96px 0; }
+
+    /* ---------- Header ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(253, 248, 239, 0.72);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, box-shadow .3s, background .3s;
+    }
+    header.scrolled {
+      border-bottom-color: var(--line);
+      box-shadow: 0 10px 30px rgba(70,50,10,.06);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 22px; letter-spacing: .5px; }
+    .brand .mark {
+      width: 38px; height: 38px; border-radius: 11px;
+      background: linear-gradient(140deg, var(--gold), var(--gold-deep));
+      display: grid; place-items: center; color: #fff; font-size: 20px;
+      box-shadow: 0 8px 18px rgba(201,135,10,.35);
+    }
+    .brand small { font-family: "Manrope"; font-weight: 600; font-size: 11px; letter-spacing: 2px; color: var(--muted); display:block; text-transform: uppercase; }
+    nav .links { display: flex; align-items: center; gap: 30px; }
+    nav .links a { font-weight: 600; font-size: 15px; color: var(--ink); opacity: .85; transition: opacity .2s, color .2s; }
+    nav .links a:hover { opacity: 1; color: var(--gold-deep); }
+    .right { display: flex; align-items: center; gap: 16px; }
+    .langs { display: flex; gap: 4px; background: var(--cream-2); padding: 4px; border-radius: 999px; border: 1px solid var(--line); }
+    .langs button {
+      border: 0; background: transparent; cursor: pointer;
+      font-family: inherit; font-weight: 700; font-size: 13px; color: var(--muted);
+      padding: 6px 12px; border-radius: 999px; transition: .2s;
+    }
+    .langs button.active { background: #fff; color: var(--gold-deep); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .burger { display: none; border: 0; background: transparent; cursor: pointer; padding: 8px; }
+    .burger span { display:block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; border-radius: 2px; transition: .3s; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 70px 0 90px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(233,169,21,.12); color: var(--gold-deep);
+      border: 1px solid rgba(233,169,21,.3);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: .3px;
+    }
+    .hero h1 { font-size: clamp(34px, 5.2vw, 60px); line-height: 1.04; font-weight: 900; margin: 22px 0 18px; letter-spacing: -1px; }
+    .hero h1 .hl { color: var(--gold-deep); }
+    .hero p.lead { font-size: 19px; color: var(--muted); max-width: 540px; }
+    .cta-row { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 15px 26px; border-radius: 14px; font-weight: 700; font-size: 15px;
+      cursor: pointer; border: 1px solid transparent; transition: transform .15s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(140deg, var(--gold), var(--gold-deep)); color: #fff; box-shadow: 0 14px 30px rgba(201,135,10,.32); }
+    .btn-ghost { background: #fff; border-color: var(--line); color: var(--ink); }
+    .stats { display: flex; gap: 34px; margin-top: 46px; flex-wrap: wrap; }
+    .stat .n { font-family: "Unbounded"; font-weight: 800; font-size: 30px; color: var(--ink); }
+    .stat .l { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+    /* ---------- Cheese wheel ---------- */
+    .wheel-stage { position: relative; display: grid; place-items: center; min-height: 420px; }
+    .wheel-glow {
+      position: absolute; width: 360px; height: 360px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(247,210,122,.55), rgba(247,210,122,0) 65%);
+      filter: blur(6px);
+    }
+    .cheese {
+      width: min(400px, 80vw); height: auto;
+      filter: drop-shadow(0 30px 40px rgba(120,80,10,.3));
+      animation: float 6s ease-in-out infinite;
+    }
+    .cheese .spin { transform-origin: 200px 200px; animation: spin 16s linear infinite; }
+    .wheel-stage:hover .cheese .spin { animation-duration: 3.5s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    .spin-tag {
+      position: absolute; bottom: 8px; right: 6%;
+      background: #fff; border: 1px solid var(--line); border-radius: 999px;
+      padding: 8px 16px; font-size: 13px; font-weight: 700; color: var(--gold-deep);
+      box-shadow: var(--shadow);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cheese, .cheese .spin { animation: none; }
+    }
+
+    /* ---------- Section heads ---------- */
+    .eyebrow { color: var(--gold-deep); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 13px; }
+    .sec-head h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; margin: 12px 0 14px; letter-spacing: -.5px; }
+    .sec-head p { color: var(--muted); max-width: 620px; font-size: 17px; }
+    .sec-head { margin-bottom: 44px; }
+
+    /* ---------- Catalog ---------- */
+    #products { background: linear-gradient(180deg, var(--cream), var(--cream-2)); }
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 34px; }
+    .filters button {
+      font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer;
+      padding: 10px 20px; border-radius: 999px; border: 1px solid var(--line);
+      background: #fff; color: var(--ink); transition: .2s;
+    }
+    .filters button.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
     .card {
-      background: var(--card);
-      border: 1px solid #262b36;
-      border-radius: 16px;
-      padding: 40px 44px;
-      max-width: 460px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      overflow: hidden; transition: transform .25s, box-shadow .25s;
+      display: flex; flex-direction: column;
     }
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(94,234,212,0.08);
-      border: 1px solid rgba(94,234,212,0.25);
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 24px;
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .card .ph { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+    .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .card:hover .ph img { transform: scale(1.07); }
+    .card .tag {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(255,255,255,.92); color: var(--gold-deep);
+      font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px;
     }
-    .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 0 rgba(94,234,212,0.6);
-      animation: pulse 1.8s infinite;
+    .card .body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .card h3 { font-family: "Manrope"; font-weight: 700; font-size: 18px; }
+    .card .desc { color: var(--muted); font-size: 14px; flex: 1; }
+    .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+    .card .price { font-family: "Unbounded"; font-weight: 700; font-size: 17px; color: var(--ink); }
+    .card .unit { font-size: 12px; color: var(--muted); font-weight: 600; }
+
+    /* ---------- About ---------- */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .about-media { position: relative; }
+    .about-media img { border-radius: var(--radius); box-shadow: var(--shadow); aspect-ratio: 5/4; object-fit: cover; width: 100%; }
+    .about-media .float-card {
+      position: absolute; bottom: -24px; left: -24px; background: #fff;
+      border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px;
+      box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px;
     }
-    @keyframes pulse {
-      0%   { box-shadow: 0 0 0 0 rgba(94,234,212,0.5); }
-      70%  { box-shadow: 0 0 0 10px rgba(94,234,212,0); }
-      100% { box-shadow: 0 0 0 0 rgba(94,234,212,0); }
+    .float-card .ic { font-size: 26px; }
+    .float-card b { font-size: 22px; font-family: "Unbounded"; }
+    .float-card span { font-size: 12px; color: var(--muted); display: block; }
+    .about-text h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 18px; letter-spacing: -.5px; }
+    .about-text p { color: var(--muted); font-size: 17px; margin-bottom: 16px; }
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; }
+    .feature { display: flex; gap: 12px; align-items: flex-start; }
+    .feature .fi { flex: 0 0 42px; height: 42px; border-radius: 12px; background: rgba(233,169,21,.13); display: grid; place-items: center; font-size: 20px; }
+    .feature b { display: block; font-size: 15px; }
+    .feature span { font-size: 13px; color: var(--muted); }
+
+    /* ---------- Contact ---------- */
+    #contact { background: var(--ink); color: var(--cream); }
+    #contact .eyebrow { color: var(--gold-soft); }
+    #contact .sec-head h2 { color: #fff; }
+    #contact .sec-head p { color: #c9bda6; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: stretch; }
+    .info-list { display: flex; flex-direction: column; gap: 22px; }
+    .info {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+      padding: 20px; border-radius: 16px;
     }
-    h1 { font-size: 34px; margin-bottom: 8px; }
-    .domain { color: var(--accent); }
-    p { color: var(--muted); line-height: 1.6; }
-    .meta {
-      margin-top: 28px;
-      padding-top: 20px;
-      border-top: 1px solid #262b36;
-      font-size: 13px;
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
+    .info .ii { flex: 0 0 46px; height: 46px; border-radius: 12px; background: linear-gradient(140deg, var(--gold), var(--gold-deep)); display: grid; place-items: center; font-size: 22px; }
+    .info b { display: block; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 3px; }
+    .info span { color: #ece3d2; font-size: 16px; }
+    .map { border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); min-height: 360px; }
+    .map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; filter: grayscale(.2) contrast(1.05); }
+
+    /* ---------- Footer ---------- */
+    footer { background: #1a140c; color: #a99a82; padding: 38px 0; }
+    .foot-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .foot-row .brand { color: var(--cream); font-size: 18px; }
+    .foot-row .brand .mark { width: 32px; height: 32px; font-size: 17px; }
+    footer small { font-size: 13px; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      section { padding: 70px 0; }
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .wheel-stage { min-height: 320px; order: -1; }
+      nav .links { display: none; }
+      .burger { display: block; }
+      nav .links.open {
+        display: flex; flex-direction: column; position: absolute; top: 74px; left: 0; right: 0;
+        background: var(--cream); padding: 20px 6vw; gap: 18px; border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+      .features { grid-template-columns: 1fr; }
+      .about-media .float-card { left: 12px; bottom: -18px; }
     }
-    .meta span { color: var(--text); }
   </style>
 </head>
 <body>
-  <main class="card">
-    <div class="status"><span class="dot"></span> Site is running</div>
-    <h1>Welcome to <span class="domain">ursus.kg</span></h1>
-    <p>If you can read this, the website is live and serving correctly.</p>
-    <div class="meta">
-      Local time: <span id="time">—</span><br />
-      Loaded at: <span id="loaded">—</span>
+  <header id="header">
+    <div class="wrap nav">
+      <a href="#top" class="brand">
+        <span class="mark">🐻</span>
+        <span>URSUS<small data-i18n="brand.tag">Молочный завод</small></span>
+      </a>
+      <nav style="position:relative">
+        <div class="links" id="navlinks">
+          <a href="#products" data-i18n="nav.products">Продукция</a>
+          <a href="#about" data-i18n="nav.about">О заводе</a>
+          <a href="#quality" data-i18n="nav.quality">Качество</a>
+          <a href="#contact" data-i18n="nav.contact">Контакты</a>
+        </div>
+      </nav>
+      <div class="right">
+        <div class="langs" id="langs">
+          <button data-lang="ru" class="active">RU</button>
+          <button data-lang="ky">KY</button>
+          <button data-lang="en">EN</button>
+        </div>
+        <button class="burger" id="burger" aria-label="menu"><span></span><span></span><span></span></button>
+      </div>
     </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="badge">🧀 <span data-i18n="hero.badge">Беловодск · Чуйская область</span></span>
+          <h1 data-i18n="hero.title">Чистые молочные продукты из сердца <span class="hl">Чуйской долины</span></h1>
+          <p class="lead" data-i18n="hero.lead">URSUS производит сыр, молоко, масло и сливки в Беловодске — из молока высокогорных пастбищ, по традиционным рецептам.</p>
+          <div class="cta-row">
+            <a href="#products" class="btn btn-primary" data-i18n="hero.cta1">Смотреть каталог →</a>
+            <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta2">Связаться с нами</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><div class="n">20+</div><div class="l" data-i18n="stat.years">лет опыта</div></div>
+            <div class="stat"><div class="n">40+</div><div class="l" data-i18n="stat.products">видов продукции</div></div>
+            <div class="stat"><div class="n">100%</div><div class="l" data-i18n="stat.natural">натуральное молоко</div></div>
+            <div class="stat"><div class="n">12</div><div class="l" data-i18n="stat.regions">регионов поставки</div></div>
+          </div>
+        </div>
+        <div class="wheel-stage">
+          <div class="wheel-glow"></div>
+          <!-- Rotating cheese wheel -->
+          <svg class="cheese" viewBox="0 0 400 400" role="img" aria-label="Cheese wheel">
+            <defs>
+              <radialGradient id="paste" cx="42%" cy="38%" r="70%">
+                <stop offset="0%" stop-color="#fce99a"/>
+                <stop offset="55%" stop-color="#f6d358"/>
+                <stop offset="100%" stop-color="#eab12a"/>
+              </radialGradient>
+              <linearGradient id="rind" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#e2a836"/>
+                <stop offset="100%" stop-color="#b97f12"/>
+              </linearGradient>
+            </defs>
+            <g class="spin">
+              <circle cx="200" cy="200" r="180" fill="url(#rind)"/>
+              <circle cx="200" cy="200" r="166" fill="url(#paste)"/>
+              <!-- wedge cut -->
+              <path d="M200 200 L200 26 A174 174 0 0 1 322 95 Z" fill="#fff4cf" opacity="0.92"/>
+              <path d="M200 200 L200 26 A174 174 0 0 1 322 95 Z" fill="none" stroke="#e6bf52" stroke-width="2"/>
+              <!-- holes -->
+              <circle cx="150" cy="150" r="17" fill="#e7c259"/>
+              <circle cx="150" cy="150" r="14" fill="#d9ac3a"/>
+              <circle cx="250" cy="170" r="12" fill="#d9ac3a"/>
+              <circle cx="170" cy="250" r="20" fill="#d9ac3a"/>
+              <circle cx="255" cy="255" r="14" fill="#d9ac3a"/>
+              <circle cx="125" cy="215" r="9" fill="#d9ac3a"/>
+              <circle cx="225" cy="120" r="8" fill="#d9ac3a"/>
+              <circle cx="290" cy="205" r="11" fill="#d9ac3a"/>
+              <circle cx="205" cy="300" r="10" fill="#d9ac3a"/>
+              <!-- highlight -->
+              <ellipse cx="150" cy="120" rx="70" ry="40" fill="#fff" opacity="0.16"/>
+            </g>
+          </svg>
+          <div class="spin-tag" data-i18n="hero.spin">🧀 наведите — сыр закрутится быстрее</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow" data-i18n="prod.eyebrow">Каталог</span>
+          <h2 data-i18n="prod.title">Наша продукция</h2>
+          <p data-i18n="prod.sub">Свежие сыры, цельное молоко, сливочное масло и сливки — каждый день с нашего завода в Беловодске.</p>
+        </div>
+        <div class="filters reveal" id="filters"></div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap about-grid">
+        <div class="about-media reveal">
+          <img src="images/factory.jpg" alt="URSUS dairy factory" />
+          <div class="float-card">
+            <span class="ic">🐄</span>
+            <div><b>1 200+</b><span data-i18n="about.float">литров молока в день</span></div>
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <span class="eyebrow" data-i18n="about.eyebrow">О заводе</span>
+          <h2 data-i18n="about.title">Семейный молочный завод в Беловодске</h2>
+          <p data-i18n="about.p1">URSUS — это молочный завод в Беловодске, Чуйская область. Мы работаем напрямую с фермерами Чуйской долины и собираем свежее молоко каждое утро.</p>
+          <p data-i18n="about.p2">Сыр выдерживается естественным образом, масло сбивается небольшими партиями, а сливки и молоко проходят бережную обработку — чтобы сохранить настоящий вкус.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUALITY / FEATURES -->
+    <section id="quality" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow" data-i18n="qual.eyebrow">Почему URSUS</span>
+          <h2 data-i18n="qual.title">Качество в каждой упаковке</h2>
+        </div>
+        <div class="features reveal" style="grid-template-columns:repeat(4,1fr)">
+          <div class="feature"><div class="fi">🌿</div><div><b data-i18n="feat.1t">Натуральное молоко</b><span data-i18n="feat.1d">Только свежее молоко местных ферм</span></div></div>
+          <div class="feature"><div class="fi">🚫</div><div><b data-i18n="feat.2t">Без консервантов</b><span data-i18n="feat.2d">Чистый состав без добавок</span></div></div>
+          <div class="feature"><div class="fi">👨‍🍳</div><div><b data-i18n="feat.3t">Традиционные рецепты</b><span data-i18n="feat.3d">Проверенные временем технологии</span></div></div>
+          <div class="feature"><div class="fi">❄️</div><div><b data-i18n="feat.4t">Свежесть каждый день</b><span data-i18n="feat.4d">Доставка по всему Кыргызстану</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow" data-i18n="cont.eyebrow">Контакты</span>
+          <h2 data-i18n="cont.title">Свяжитесь с нами</h2>
+          <p data-i18n="cont.sub">Оптовые поставки, сотрудничество и заказы — мы всегда на связи.</p>
+        </div>
+        <div class="contact-grid reveal">
+          <div class="info-list">
+            <div class="info"><div class="ii">📍</div><div><b data-i18n="cont.addr">Адрес</b><span data-i18n="cont.addrval">г. Беловодск, Чуйская область, Кыргызстан</span></div></div>
+            <div class="info"><div class="ii">📞</div><div><b data-i18n="cont.phone">Телефон</b><span>+996 312 00 00 00</span></div></div>
+            <div class="info"><div class="ii">✉️</div><div><b data-i18n="cont.email">Эл. почта</b><span>info@ursus.kg</span></div></div>
+            <div class="info"><div class="ii">🕒</div><div><b data-i18n="cont.hours">Часы работы</b><span data-i18n="cont.hoursval">Пн–Сб · 9:00–18:00</span></div></div>
+          </div>
+          <div class="map">
+            <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Belovodsk,+Chuy+Region,+Kyrgyzstan&output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <footer>
+    <div class="wrap foot-row">
+      <a href="#top" class="brand"><span class="mark">🐻</span> URSUS</a>
+      <small data-i18n="foot.rights">© 2026 URSUS · Молочный завод · Беловодск, Кыргызстан</small>
+    </div>
+  </footer>
+
   <script>
-    function fmt(d) {
-      return d.toLocaleString(undefined, {
-        dateStyle: "medium",
-        timeStyle: "medium"
+    /* ---------- Translations ---------- */
+    const I18N = {
+      ru: {
+        "brand.tag":"Молочный завод",
+        "nav.products":"Продукция","nav.about":"О заводе","nav.quality":"Качество","nav.contact":"Контакты",
+        "hero.badge":"Беловодск · Чуйская область",
+        "hero.title":'Чистые молочные продукты из сердца <span class="hl">Чуйской долины</span>',
+        "hero.lead":"URSUS производит сыр, молоко, масло и сливки в Беловодске — из молока высокогорных пастбищ, по традиционным рецептам.",
+        "hero.cta1":"Смотреть каталог →","hero.cta2":"Связаться с нами",
+        "hero.spin":"🧀 наведите — сыр закрутится быстрее",
+        "stat.years":"лет опыта","stat.products":"видов продукции","stat.natural":"натуральное молоко","stat.regions":"регионов поставки",
+        "prod.eyebrow":"Каталог","prod.title":"Наша продукция",
+        "prod.sub":"Свежие сыры, цельное молоко, сливочное масло и сливки — каждый день с нашего завода в Беловодске.",
+        "about.eyebrow":"О заводе","about.title":"Семейный молочный завод в Беловодске",
+        "about.p1":"URSUS — это молочный завод в Беловодске, Чуйская область. Мы работаем напрямую с фермерами Чуйской долины и собираем свежее молоко каждое утро.",
+        "about.p2":"Сыр выдерживается естественным образом, масло сбивается небольшими партиями, а сливки и молоко проходят бережную обработку — чтобы сохранить настоящий вкус.",
+        "about.float":"литров молока в день",
+        "qual.eyebrow":"Почему URSUS","qual.title":"Качество в каждой упаковке",
+        "feat.1t":"Натуральное молоко","feat.1d":"Только свежее молоко местных ферм",
+        "feat.2t":"Без консервантов","feat.2d":"Чистый состав без добавок",
+        "feat.3t":"Традиционные рецепты","feat.3d":"Проверенные временем технологии",
+        "feat.4t":"Свежесть каждый день","feat.4d":"Доставка по всему Кыргызстану",
+        "cont.eyebrow":"Контакты","cont.title":"Свяжитесь с нами","cont.sub":"Оптовые поставки, сотрудничество и заказы — мы всегда на связи.",
+        "cont.addr":"Адрес","cont.addrval":"г. Беловодск, Чуйская область, Кыргызстан",
+        "cont.phone":"Телефон","cont.email":"Эл. почта","cont.hours":"Часы работы","cont.hoursval":"Пн–Сб · 9:00–18:00",
+        "foot.rights":"© 2026 URSUS · Молочный завод · Беловодск, Кыргызстан",
+        "filter.all":"Все","filter.cheese":"Сыры","filter.milk":"Молоко","filter.butter":"Масло","filter.cream":"Сливки",
+        "unit":"за шт."
+      },
+      ky: {
+        "brand.tag":"Сүт заводу",
+        "nav.products":"Өнүмдөр","nav.about":"Завод жөнүндө","nav.quality":"Сапат","nav.contact":"Байланыш",
+        "hero.badge":"Беловодск · Чүй облусу",
+        "hero.title":'<span class="hl">Чүй өрөөнүнүн</span> жүрөгүнөн таза сүт азыктары',
+        "hero.lead":"URSUS Беловодскто сыр, сүт, сары май жана каймак өндүрөт — бийик тоо жайыттарынын сүтүнөн, салттуу ыкма менен.",
+        "hero.cta1":"Каталогду көрүү →","hero.cta2":"Биз менен байланышуу",
+        "hero.spin":"🧀 курсорду алып келиңиз — сыр тезирээк айланат",
+        "stat.years":"жылдык тажрыйба","stat.products":"түрдүү өнүм","stat.natural":"табигый сүт","stat.regions":"облуска жеткирүү",
+        "prod.eyebrow":"Каталог","prod.title":"Биздин өнүмдөр",
+        "prod.sub":"Жаңы сырлар, бүтүн сүт, сары май жана каймак — Беловодсктогу заводубуздан күн сайын.",
+        "about.eyebrow":"Завод жөнүндө","about.title":"Беловодсктогу үй-бүлөлүк сүт заводу",
+        "about.p1":"URSUS — Беловодск, Чүй облусундагы сүт заводу. Биз Чүй өрөөнүнүн фермерлери менен түз иштешип, ар бир эртең менен жаңы сүт чогултабыз.",
+        "about.p2":"Сыр табигый түрдө бышат, сары май кичинекей партиялар менен бышырылат, ал эми каймак менен сүт майда-чүйдөсүнө чейин аяр иштетилет — чыныгы даамын сактоо үчүн.",
+        "about.float":"литр сүт күнүнө",
+        "qual.eyebrow":"Эмне үчүн URSUS","qual.title":"Ар бир таңгакта сапат",
+        "feat.1t":"Табигый сүт","feat.1d":"Жергиликтүү чарбалардын жаңы сүтү гана",
+        "feat.2t":"Консерванттарсыз","feat.2d":"Кошумчаларсыз таза курам",
+        "feat.3t":"Салттуу рецепттер","feat.3d":"Убакыт сынагынан өткөн технология",
+        "feat.4t":"Күн сайын жаңы","feat.4d":"Бүткүл Кыргызстанга жеткирүү",
+        "cont.eyebrow":"Байланыш","cont.title":"Биз менен байланышыңыз","cont.sub":"Дүң жеткирүү, кызматташуу жана буйрутмалар — биз ар дайым байланыштабыз.",
+        "cont.addr":"Дарек","cont.addrval":"Беловодск шаары, Чүй облусу, Кыргызстан",
+        "cont.phone":"Телефон","cont.email":"Электрондук почта","cont.hours":"Иш убактысы","cont.hoursval":"Дүй–Ишм · 9:00–18:00",
+        "foot.rights":"© 2026 URSUS · Сүт заводу · Беловодск, Кыргызстан",
+        "filter.all":"Баары","filter.cheese":"Сыр","filter.milk":"Сүт","filter.butter":"Сары май","filter.cream":"Каймак",
+        "unit":"даанасы"
+      },
+      en: {
+        "brand.tag":"Dairy Factory",
+        "nav.products":"Products","nav.about":"About","nav.quality":"Quality","nav.contact":"Contact",
+        "hero.badge":"Belovodsk · Chui Region",
+        "hero.title":'Pure dairy from the heart of the <span class="hl">Chui Valley</span>',
+        "hero.lead":"URSUS crafts cheese, milk, butter and cream in Belovodsk — from the milk of highland pastures, the traditional way.",
+        "hero.cta1":"View catalog →","hero.cta2":"Get in touch",
+        "hero.spin":"🧀 hover to spin the cheese faster",
+        "stat.years":"years of experience","stat.products":"products","stat.natural":"natural milk","stat.regions":"regions served",
+        "prod.eyebrow":"Catalog","prod.title":"Our products",
+        "prod.sub":"Fresh cheeses, whole milk, creamy butter and cream — made daily at our factory in Belovodsk.",
+        "about.eyebrow":"About","about.title":"A family dairy factory in Belovodsk",
+        "about.p1":"URSUS is a dairy factory in Belovodsk, Chui Region. We work directly with farmers across the Chui Valley and collect fresh milk every morning.",
+        "about.p2":"Our cheese is aged naturally, butter is churned in small batches, and milk and cream are gently processed — to keep the real, honest taste.",
+        "about.float":"litres of milk a day",
+        "qual.eyebrow":"Why URSUS","qual.title":"Quality in every pack",
+        "feat.1t":"Natural milk","feat.1d":"Only fresh milk from local farms",
+        "feat.2t":"No preservatives","feat.2d":"Clean recipes, no additives",
+        "feat.3t":"Traditional recipes","feat.3d":"Time-tested craftsmanship",
+        "feat.4t":"Fresh every day","feat.4d":"Delivery across Kyrgyzstan",
+        "cont.eyebrow":"Contact","cont.title":"Get in touch","cont.sub":"Wholesale supply, partnerships and orders — we are always in touch.",
+        "cont.addr":"Address","cont.addrval":"Belovodsk, Chui Region, Kyrgyzstan",
+        "cont.phone":"Phone","cont.email":"Email","cont.hours":"Working hours","cont.hoursval":"Mon–Sat · 9:00–18:00",
+        "foot.rights":"© 2026 URSUS · Dairy Factory · Belovodsk, Kyrgyzstan",
+        "filter.all":"All","filter.cheese":"Cheese","filter.milk":"Milk","filter.butter":"Butter","filter.cream":"Cream",
+        "unit":"per item"
+      }
+    };
+
+    /* ---------- Product catalog data ---------- */
+    const CATS = ["cheese","milk","butter","cream"];
+    const PRODUCTS = [
+      { cat:"cheese", img:"cheese.jpg", price:"690", unit:"кг",
+        name:{ru:"Сыр «Ursus Gold»",ky:"«Ursus Gold» сыры",en:"Ursus Gold Cheese"},
+        desc:{ru:"Твёрдый выдержанный сыр с насыщенным вкусом.",ky:"Бай даамдуу катуу, бышкан сыр.",en:"Aged hard cheese with a rich, full flavour."}},
+      { cat:"cheese", img:"cheese.jpg", price:"540", unit:"кг",
+        name:{ru:"Эмменталь беловодский",ky:"Беловодск эмменталы",en:"Belovodsk Emmental"},
+        desc:{ru:"Полутвёрдый сыр с крупными глазками.",ky:"Чоң көздөрү бар жарым катуу сыр.",en:"Semi-hard cheese with classic large holes."}},
+      { cat:"cheese", img:"cheese.jpg", price:"420", unit:"кг",
+        name:{ru:"Сулугуни",ky:"Сулугуни",en:"Suluguni"},
+        desc:{ru:"Свежий рассольный сыр, мягкий и тянущийся.",ky:"Жаңы, жумшак, созулган сыр.",en:"Fresh brined cheese, soft and stretchy."}},
+      { cat:"cheese", img:"cheese.jpg", price:"380", unit:"уп",
+        name:{ru:"Чечил копчёный",ky:"Ысталган чечил",en:"Smoked Chechil"},
+        desc:{ru:"Копчёный сыр-косичка к чаю и пиву.",ky:"Чай менен сыраага ысталган örмö сыр.",en:"Smoked string cheese braid."}},
+
+      { cat:"milk", img:"milk.jpg", price:"75", unit:"1 л",
+        name:{ru:"Молоко цельное 3,2%",ky:"Бүтүн сүт 3,2%",en:"Whole Milk 3.2%"},
+        desc:{ru:"Пастеризованное молоко из свежего надоя.",ky:"Жаңы саалган сүттөн пастеризацияланган.",en:"Pasteurised milk from the fresh morning yield."}},
+      { cat:"milk", img:"milk.jpg", price:"68", unit:"1 л",
+        name:{ru:"Молоко 2,5%",ky:"Сүт 2,5%",en:"Milk 2.5%"},
+        desc:{ru:"Лёгкое молоко для каждого дня.",ky:"Күн сайын ичүүгө жеңил сүт.",en:"Light everyday milk."}},
+      { cat:"milk", img:"milk.jpg", price:"95", unit:"1 л",
+        name:{ru:"Молоко топлёное 4%",ky:"Кайнатылган сүт 4%",en:"Baked Milk 4%"},
+        desc:{ru:"Топлёное молоко с карамельным оттенком.",ky:"Карамель түстүү кайнатылган сүт.",en:"Baked milk with a caramel note."}},
+
+      { cat:"butter", img:"butter.jpg", price:"180", unit:"200 г",
+        name:{ru:"Масло сливочное 82,5%",ky:"Сары май 82,5%",en:"Butter 82.5%"},
+        desc:{ru:"Натуральное масло из свежих сливок.",ky:"Жаңы каймактан табигый сары май.",en:"Natural butter from fresh cream."}},
+      { cat:"butter", img:"butter.jpg", price:"240", unit:"300 г",
+        name:{ru:"Масло топлёное (гхи)",ky:"Эритилген сары май (гхи)",en:"Ghee (Clarified Butter)"},
+        desc:{ru:"Ароматное топлёное масло для готовки.",ky:"Тамак жасоого жыпар жыттуу эритилген май.",en:"Aromatic clarified butter for cooking."}},
+
+      { cat:"cream", img:"cream.jpg", price:"120", unit:"250 мл",
+        name:{ru:"Сливки 20%",ky:"Каймак 20%",en:"Cream 20%"},
+        desc:{ru:"Нежные сливки для кофе и соусов.",ky:"Кофе менен соустарга жумшак каймак.",en:"Smooth cream for coffee and sauces."}},
+      { cat:"cream", img:"cream.jpg", price:"160", unit:"250 мл",
+        name:{ru:"Сливки 33% для взбивания",ky:"Көпүртүүчү каймак 33%",en:"Whipping Cream 33%"},
+        desc:{ru:"Густые сливки, отлично взбиваются.",ky:"Коюу каймак, жакшы көпүрөт.",en:"Rich cream that whips up perfectly."}},
+      { cat:"cream", img:"cream.jpg", price:"110", unit:"400 г",
+        name:{ru:"Сметана 20%",ky:"Сметана 20%",en:"Sour Cream 20%"},
+        desc:{ru:"Классическая сметана из натуральных сливок.",ky:"Табигый каймактан классикалык сметана.",en:"Classic sour cream from natural cream."}}
+    ];
+
+    /* ---------- State + render ---------- */
+    let lang = "ru", filter = "all";
+
+    function applyI18n() {
+      document.documentElement.lang = lang;
+      const dict = I18N[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key] != null) el.innerHTML = dict[key];
       });
     }
-    var loaded = new Date();
-    document.getElementById("loaded").textContent = fmt(loaded);
-    function tick() {
-      document.getElementById("time").textContent = fmt(new Date());
+
+    function renderFilters() {
+      const dict = I18N[lang];
+      const box = document.getElementById("filters");
+      const items = [["all","filter.all"],["cheese","filter.cheese"],["milk","filter.milk"],["butter","filter.butter"],["cream","filter.cream"]];
+      box.innerHTML = items.map(([key,tk]) =>
+        `<button data-f="${key}" class="${filter===key?'active':''}">${dict[tk]}</button>`).join("");
+      box.querySelectorAll("button").forEach(b =>
+        b.onclick = () => { filter = b.dataset.f; renderFilters(); renderGrid(); });
     }
-    tick();
-    setInterval(tick, 1000);
+
+    function renderGrid() {
+      const dict = I18N[lang];
+      const grid = document.getElementById("grid");
+      const list = PRODUCTS.filter(p => filter==="all" || p.cat===filter);
+      grid.innerHTML = list.map(p => `
+        <article class="card">
+          <div class="ph">
+            <img src="images/${p.img}" alt="${p.name[lang]}" loading="lazy" />
+            <span class="tag">${dict["filter."+p.cat]}</span>
+          </div>
+          <div class="body">
+            <h3>${p.name[lang]}</h3>
+            <p class="desc">${p.desc[lang]}</p>
+            <div class="foot">
+              <span class="price">${p.price} <span style="font-size:13px">сом</span></span>
+              <span class="unit">${p.unit}</span>
+            </div>
+          </div>
+        </article>`).join("");
+    }
+
+    function setLang(l) {
+      lang = l;
+      document.querySelectorAll("#langs button").forEach(b => b.classList.toggle("active", b.dataset.lang===l));
+      applyI18n(); renderFilters(); renderGrid();
+    }
+
+    document.querySelectorAll("#langs button").forEach(b => b.onclick = () => setLang(b.dataset.lang));
+
+    /* ---------- Header, menu, reveal ---------- */
+    const header = document.getElementById("header");
+    addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 12));
+
+    const burger = document.getElementById("burger"), navlinks = document.getElementById("navlinks");
+    burger.onclick = () => navlinks.classList.toggle("open");
+    navlinks.querySelectorAll("a").forEach(a => a.onclick = () => navlinks.classList.remove("open"));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    /* ---------- Init ---------- */
+    setLang("ru");
   </script>
 </body>
 </html>
