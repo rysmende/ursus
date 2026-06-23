@@ -8,7 +8,7 @@ Hosted on Cloudflare Pages. Every push to `main` triggers an automatic deploy.
 ## Features
 - Trilingual interface — **Russian / Kyrgyz / English** (in-page switcher, no reload)
 - Modern dairy-themed design with a product catalog (filterable by category)
-- Animated rotating cheese wheel in the hero (spins faster on hover)
+- Scroll-driven 3D cheese wheel in the hero (Three.js, with a photo fallback)
 - Sections: hero, catalog, about, quality, contact (with map)
 
 ## Files

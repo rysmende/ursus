@@ -1,0 +1,7 @@
+# Local scratch / image-candidate working area (not for deploy)
+cand/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
