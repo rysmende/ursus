@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ursus.kg</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #181b22;
+      --accent: #5eead4;
+      --text: #e6e9ef;
+      --muted: #8b93a7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(1200px 600px at 50% -10%, #1b2030, var(--bg));
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid #262b36;
+      border-radius: 16px;
+      padding: 40px 44px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(94,234,212,0.08);
+      border: 1px solid rgba(94,234,212,0.25);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(94,234,212,0.6);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(94,234,212,0.5); }
+      70%  { box-shadow: 0 0 0 10px rgba(94,234,212,0); }
+      100% { box-shadow: 0 0 0 0 rgba(94,234,212,0); }
+    }
+    h1 { font-size: 34px; margin-bottom: 8px; }
+    .domain { color: var(--accent); }
+    p { color: var(--muted); line-height: 1.6; }
+    .meta {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #262b36;
+      font-size: 13px;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .meta span { color: var(--text); }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="status"><span class="dot"></span> Site is running</div>
+    <h1>Welcome to <span class="domain">ursus.kg</span></h1>
+    <p>If you can read this, the website is live and serving correctly.</p>
+    <div class="meta">
+      Local time: <span id="time">—</span><br />
+      Loaded at: <span id="loaded">—</span>
+    </div>
+  </main>
+
+  <script>
+    function fmt(d) {
+      return d.toLocaleString(undefined, {
+        dateStyle: "medium",
+        timeStyle: "medium"
+      });
+    }
+    var loaded = new Date();
+    document.getElementById("loaded").textContent = fmt(loaded);
+    function tick() {
+      document.getElementById("time").textContent = fmt(new Date());
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
