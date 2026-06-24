@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>URSUS — Молочный завод · Беловодск, Кыргызстан</title>
-  <meta name="description" content="URSUS — производство сыра, молока, масла и сливок в Беловодске, Чуйская область, Кыргызстан. Натуральные молочные продукты по традиционным рецептам." />
+  <title>URSUS — Сырный завод ЗАО «Урсус» · Чуйская область, Кыргызстан</title>
+  <meta name="description" content="ЗАО «Урсус» — сырный завод в селе Темен-Суу, Московский район, Чуйская область. Завод основан в 1940 году. Натуральные сыры, масло, молоко и сливки без растительных жиров. Халал." />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <meta property="og:title" content="ЗАО «Урсус» — сырный завод, основан в 1940 году" />
+  <meta property="og:description" content="Только свежее, только натуральное. Натуральные сыры из коровьего молока — Чуйская область, Кыргызстан." />
+  <meta property="og:image" content="images/products-family.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet" />
@@ -64,10 +68,9 @@
     .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 21px; letter-spacing: .5px; color: var(--walnut); }
     .brand .mark {
-      width: 40px; height: 40px; border-radius: 12px;
-      background: linear-gradient(150deg, var(--gold), var(--wood-deep));
-      display: grid; place-items: center; color: #1a1208; font-size: 21px; font-weight: 900;
-      box-shadow: inset 0 0 0 1.5px rgba(236,197,120,.5), 0 8px 20px rgba(0,0,0,.5);
+      width: 42px; height: 42px; border-radius: 12px; object-fit: contain;
+      background: radial-gradient(circle at 50% 38%, #2f3a1c, #161108 78%);
+      padding: 3px; box-shadow: inset 0 0 0 1.5px rgba(236,197,120,.32), 0 8px 20px rgba(0,0,0,.5);
     }
     .brand small { font-family: "Manrope"; font-weight: 600; font-size: 10px; letter-spacing: 2.4px; color: var(--muted); display: block; text-transform: uppercase; }
     nav .links { display: flex; align-items: center; gap: 28px; }
@@ -194,6 +197,8 @@
     .info .ii { flex: 0 0 46px; height: 46px; border-radius: 12px; background: linear-gradient(150deg, var(--gold), var(--wood-deep)); display: grid; place-items: center; font-size: 21px; }
     .info b { display: block; font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 3px; }
     .info span { color: #ece1cd; font-size: 16px; }
+    .info span a { color: inherit; border-bottom: 1px solid rgba(236,197,120,.3); transition: color .2s, border-color .2s; }
+    .info span a:hover { color: var(--gold-soft); border-color: var(--gold-soft); }
     .map { border-radius: 16px; overflow: hidden; border: 1px solid rgba(236,197,120,.2); min-height: 340px; }
     .map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; filter: sepia(.35) contrast(1.05) brightness(.85); }
 
@@ -240,8 +245,8 @@
   <header id="header">
     <div class="wrap nav">
       <a href="#top" class="brand">
-        <span class="mark">U</span>
-        <span>URSUS<small data-i18n="brand.tag">Молочный завод</small></span>
+        <img class="mark" src="images/logo.png" alt="URSUS — белый медведь" />
+        <span>URSUS<small data-i18n="brand.tag">Сырный завод · с 1940</small></span>
       </a>
       <nav style="position:relative">
         <div class="links" id="navlinks">
@@ -274,18 +279,18 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-text">
-          <span class="badge">🧀 <span data-i18n="hero.badge">Беловодск · Чуйская область</span></span>
-          <h1 data-i18n="hero.title">Чистые молочные продукты из сердца <span class="hl">Чуйской долины</span></h1>
-          <p class="lead" data-i18n="hero.lead">URSUS производит сыр, молоко, масло и сливки в Беловодске — из молока высокогорных пастбищ, по традиционным рецептам.</p>
+          <span class="badge">🐻‍❄️ <span data-i18n="hero.badge">Завод основан в 1940 году</span></span>
+          <h1 data-i18n="hero.title">Только свежее, <span class="hl">только натуральное</span></h1>
+          <p class="lead" data-i18n="hero.lead">Вся продукция ЗАО «Урсус» производится исключительно из натурального коровьего молока — без растительных жиров. Сыры, масло, молоко и сливки из Чуйской долины.</p>
           <div class="cta-row">
-            <a href="#products" class="btn btn-primary" data-i18n="hero.cta1">Смотреть каталог →</a>
-            <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta2">Связаться с нами</a>
+            <a href="#products" class="btn btn-primary" data-i18n="hero.cta1">Смотреть продукцию →</a>
+            <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta2">Оптовые заказы</a>
           </div>
           <div class="stats">
-            <div class="stat"><div class="n">20+</div><div class="l" data-i18n="stat.years">лет опыта</div></div>
-            <div class="stat"><div class="n">40+</div><div class="l" data-i18n="stat.products">видов продукции</div></div>
-            <div class="stat"><div class="n">100%</div><div class="l" data-i18n="stat.natural">натуральное молоко</div></div>
-            <div class="stat"><div class="n">12</div><div class="l" data-i18n="stat.regions">регионов поставки</div></div>
+            <div class="stat"><div class="n">1940</div><div class="l" data-i18n="stat.years">год основания</div></div>
+            <div class="stat"><div class="n">10+</div><div class="l" data-i18n="stat.products">сортов сыра</div></div>
+            <div class="stat"><div class="n">30</div><div class="l" data-i18n="stat.capacity">тонн в сутки</div></div>
+            <div class="stat"><div class="n">70+</div><div class="l" data-i18n="stat.staff">сотрудников</div></div>
           </div>
         </div>
         <div class="wheel-stage" aria-hidden="true"></div>
@@ -298,7 +303,7 @@
         <div class="sec-head reveal">
           <span class="eyebrow" data-i18n="prod.eyebrow">Каталог</span>
           <h2 data-i18n="prod.title">Наша продукция</h2>
-          <p data-i18n="prod.sub">Свежие сыры, цельное молоко, сливочное масло и сливки — каждый день с нашего завода в Беловодске.</p>
+          <p data-i18n="prod.sub">Натуральные сыры, масло, молоко и сливки. Наши сыры имеют нежную пластичную консистенцию и характерный сырный рисунок с дырочками.</p>
         </div>
         <div class="filters reveal" id="filters"></div>
         <div class="grid" id="grid"></div>
@@ -309,17 +314,17 @@
     <section id="about">
       <div class="wrap about-grid">
         <div class="about-media reveal">
-          <img src="images/factory.jpg" alt="URSUS dairy production" />
+          <img src="images/products-family.png" alt="Продукция ЗАО «Урсус»" />
           <div class="float-card">
-            <span class="ic">🐄</span>
-            <div><b>1 200+</b><span data-i18n="about.float">литров молока в день</span></div>
+            <span class="ic">🐻‍❄️</span>
+            <div><b data-i18n="about.floatval">с 1940</b><span data-i18n="about.float">года на рынке</span></div>
           </div>
         </div>
         <div class="about-text reveal">
           <span class="eyebrow" data-i18n="about.eyebrow">О заводе</span>
-          <h2 data-i18n="about.title">Семейный молочный завод в Беловодске</h2>
-          <p data-i18n="about.p1">URSUS — это молочный завод в Беловодске, Чуйская область. Мы работаем напрямую с фермерами Чуйской долины и собираем свежее молоко каждое утро.</p>
-          <p data-i18n="about.p2">Сыр выдерживается естественным образом, масло сбивается небольшими партиями, а сливки и молоко проходят бережную обработку — чтобы сохранить настоящий вкус.</p>
+          <h2 data-i18n="about.title">Сырный завод ЗАО «Урсус»</h2>
+          <p data-i18n="about.p1">Завод основан в 1940 году на базе Темен-Суйского молочного завода в Московском районе Чуйской области. Производственные цеха полностью модернизированы, а в основе бренда — белый медведь (лат. <i>Ursus</i>).</p>
+          <p data-i18n="about.p2">Молоко закупается у фермеров Московского и Панфиловского районов. Мощность завода — 30 тонн молочной продукции в сутки, над созданием сыров трудятся более 70 сотрудников. Продукция «Урсус» успешно продаётся в Кыргызстане и соседнем Казахстане.</p>
         </div>
       </div>
     </section>
@@ -332,10 +337,10 @@
           <h2 data-i18n="qual.title">Качество в каждой упаковке</h2>
         </div>
         <div class="features reveal">
-          <div class="feature"><div class="fi">🌿</div><b data-i18n="feat.1t">Натуральное молоко</b><span data-i18n="feat.1d">Только свежее молоко местных ферм</span></div>
-          <div class="feature"><div class="fi">🚫</div><b data-i18n="feat.2t">Без консервантов</b><span data-i18n="feat.2d">Чистый состав без добавок</span></div>
-          <div class="feature"><div class="fi">👨‍🍳</div><b data-i18n="feat.3t">Традиционные рецепты</b><span data-i18n="feat.3d">Проверенные временем технологии</span></div>
-          <div class="feature"><div class="fi">❄️</div><b data-i18n="feat.4t">Свежесть каждый день</b><span data-i18n="feat.4d">Доставка по всему Кыргызстану</span></div>
+          <div class="feature"><div class="fi">🌿</div><b data-i18n="feat.1t">Без растительных жиров</b><span data-i18n="feat.1d">Только натуральное коровье молоко</span></div>
+          <div class="feature"><div class="fi">💧</div><b data-i18n="feat.2t">Экологически чистое сырьё</b><span data-i18n="feat.2d">Молоко ферм Чуйской долины</span></div>
+          <div class="feature"><div class="fi">🧀</div><b data-i18n="feat.3t">Технология производства сыра</b><span data-i18n="feat.3d">Проверенные временем рецептуры</span></div>
+          <div class="feature"><div class="fi">☪️</div><b data-i18n="feat.4t">Халал сертификат</b><span data-i18n="feat.4d">Сертифицированная продукция</span></div>
         </div>
       </div>
     </section>
@@ -350,14 +355,14 @@
         </div>
         <div class="contact-grid reveal">
           <div class="info-list">
-            <div class="info"><div class="ii">📍</div><div><b data-i18n="cont.addr">Адрес</b><span data-i18n="cont.addrval">г. Беловодск, Чуйская область, Кыргызстан</span></div></div>
-            <div class="info"><div class="ii">📞</div><div><b data-i18n="cont.phone">Телефон</b><span>+996 312 00 00 00</span></div></div>
-            <div class="info"><div class="ii">✉️</div><div><b data-i18n="cont.email">Эл. почта</b><span>info@ursus.kg</span></div></div>
-            <div class="info"><div class="ii">🕒</div><div><b data-i18n="cont.hours">Часы работы</b><span data-i18n="cont.hoursval">Пн–Сб · 9:00–18:00</span></div></div>
+            <div class="info"><div class="ii">📍</div><div><b data-i18n="cont.addr">Адрес</b><span data-i18n="cont.addrval">Чуйская область, Московский район, с. Темен-Суу, ул. Сырзаводская, 3</span></div></div>
+            <div class="info"><div class="ii">📞</div><div><b data-i18n="cont.phone">Приёмная</b><span><a href="tel:+996312453562">+996 (312) 45-35-62</a></span></div></div>
+            <div class="info"><div class="ii">🤝</div><div><b data-i18n="cont.sales">Коммерческий отдел</b><span><a href="tel:+996772546906">+996 772 54-69-06</a> · WhatsApp <a href="https://wa.me/996554058949">+996 554 05-89-49</a></span></div></div>
+            <div class="info"><div class="ii">✉️</div><div><b data-i18n="cont.email">Эл. почта</b><span><a href="mailto:info@ursus.kg">info@ursus.kg</a></span></div></div>
           </div>
           <div class="map">
             <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Belovodsk,+Chuy+Region,+Kyrgyzstan&output=embed"></iframe>
+              src="https://www.google.com/maps?q=Temen-Suu,+Moskovsky+District,+Chuy+Region,+Kyrgyzstan&output=embed"></iframe>
           </div>
         </div>
       </div>
@@ -366,8 +371,8 @@
 
   <footer>
     <div class="wrap foot-row">
-      <a href="#top" class="brand"><span class="mark">U</span> URSUS</a>
-      <small data-i18n="foot.rights">© 2026 URSUS · Молочный завод · Беловодск, Кыргызстан</small>
+      <a href="#top" class="brand"><img class="mark" src="images/logo.png" alt="URSUS" /> URSUS</a>
+      <small data-i18n="foot.rights">© 1940–2026 ЗАО «Урсус» · Сырный завод · Темен-Суу, Чуйская область, Кыргызстан</small>
     </div>
   </footer>
 
@@ -375,123 +380,126 @@
     /* ---------- Translations ---------- */
     const I18N = {
       ru: {
-        "brand.tag":"Молочный завод",
+        "brand.tag":"Сырный завод · с 1940",
         "nav.products":"Продукция","nav.about":"О заводе","nav.quality":"Качество","nav.contact":"Контакты",
-        "hero.badge":"Беловодск · Чуйская область",
-        "hero.title":'Чистые молочные продукты из сердца <span class="hl">Чуйской долины</span>',
-        "hero.lead":"URSUS производит сыр, молоко, масло и сливки в Беловодске — из молока высокогорных пастбищ, по традиционным рецептам.",
-        "hero.cta1":"Смотреть каталог →","hero.cta2":"Связаться с нами",
-        "stat.years":"лет опыта","stat.products":"видов продукции","stat.natural":"натуральное молоко","stat.regions":"регионов поставки",
+        "hero.badge":"Завод основан в 1940 году",
+        "hero.title":'Только свежее, <span class="hl">только натуральное</span>',
+        "hero.lead":"Вся продукция ЗАО «Урсус» производится исключительно из натурального коровьего молока — без растительных жиров. Сыры, масло, молоко и сливки из Чуйской долины.",
+        "hero.cta1":"Смотреть продукцию →","hero.cta2":"Оптовые заказы",
+        "stat.years":"год основания","stat.products":"сортов сыра","stat.capacity":"тонн в сутки","stat.staff":"сотрудников",
         "prod.eyebrow":"Каталог","prod.title":"Наша продукция",
-        "prod.sub":"Свежие сыры, цельное молоко, сливочное масло и сливки — каждый день с нашего завода в Беловодске.",
-        "about.eyebrow":"О заводе","about.title":"Семейный молочный завод в Беловодске",
-        "about.p1":"URSUS — это молочный завод в Беловодске, Чуйская область. Мы работаем напрямую с фермерами Чуйской долины и собираем свежее молоко каждое утро.",
-        "about.p2":"Сыр выдерживается естественным образом, масло сбивается небольшими партиями, а сливки и молоко проходят бережную обработку — чтобы сохранить настоящий вкус.",
-        "about.float":"литров молока в день",
+        "prod.sub":"Натуральные сыры, масло, молоко и сливки. Наши сыры имеют нежную пластичную консистенцию и характерный сырный рисунок с дырочками.",
+        "about.eyebrow":"О заводе","about.title":"Сырный завод ЗАО «Урсус»",
+        "about.p1":"Завод основан в 1940 году на базе Темен-Суйского молочного завода в Московском районе Чуйской области. Производственные цеха полностью модернизированы, а в основе бренда — белый медведь (лат. <i>Ursus</i>).",
+        "about.p2":"Молоко закупается у фермеров Московского и Панфиловского районов. Мощность завода — 30 тонн молочной продукции в сутки, над созданием сыров трудятся более 70 сотрудников. Продукция «Урсус» успешно продаётся в Кыргызстане и соседнем Казахстане.",
+        "about.float":"года на рынке","about.floatval":"с 1940",
         "qual.eyebrow":"Почему URSUS","qual.title":"Качество в каждой упаковке",
-        "feat.1t":"Натуральное молоко","feat.1d":"Только свежее молоко местных ферм",
-        "feat.2t":"Без консервантов","feat.2d":"Чистый состав без добавок",
-        "feat.3t":"Традиционные рецепты","feat.3d":"Проверенные временем технологии",
-        "feat.4t":"Свежесть каждый день","feat.4d":"Доставка по всему Кыргызстану",
+        "feat.1t":"Без растительных жиров","feat.1d":"Только натуральное коровье молоко",
+        "feat.2t":"Экологически чистое сырьё","feat.2d":"Молоко ферм Чуйской долины",
+        "feat.3t":"Технология производства сыра","feat.3d":"Проверенные временем рецептуры",
+        "feat.4t":"Халал сертификат","feat.4d":"Сертифицированная продукция",
         "cont.eyebrow":"Контакты","cont.title":"Свяжитесь с нами","cont.sub":"Оптовые поставки, сотрудничество и заказы — мы всегда на связи.",
-        "cont.addr":"Адрес","cont.addrval":"г. Беловодск, Чуйская область, Кыргызстан",
-        "cont.phone":"Телефон","cont.email":"Эл. почта","cont.hours":"Часы работы","cont.hoursval":"Пн–Сб · 9:00–18:00",
-        "foot.rights":"© 2026 URSUS · Молочный завод · Беловодск, Кыргызстан",
-        "filter.all":"Все","filter.cheese":"Сыры","filter.milk":"Молоко","filter.butter":"Масло","filter.cream":"Сливки"
+        "cont.addr":"Адрес","cont.addrval":"Чуйская область, Московский район, с. Темен-Суу, ул. Сырзаводская, 3",
+        "cont.phone":"Приёмная","cont.sales":"Коммерческий отдел","cont.email":"Эл. почта",
+        "foot.rights":"© 1940–2026 ЗАО «Урсус» · Сырный завод · Темен-Суу, Чуйская область, Кыргызстан",
+        "filter.all":"Все","filter.cheese":"Сыры","filter.butter":"Масло","filter.dairy":"Молочная продукция"
       },
       ky: {
-        "brand.tag":"Сүт заводу",
+        "brand.tag":"Сыр заводу · 1940-жылдан",
         "nav.products":"Өнүмдөр","nav.about":"Завод жөнүндө","nav.quality":"Сапат","nav.contact":"Байланыш",
-        "hero.badge":"Беловодск · Чүй облусу",
-        "hero.title":'<span class="hl">Чүй өрөөнүнүн</span> жүрөгүнөн таза сүт азыктары',
-        "hero.lead":"URSUS Беловодскто сыр, сүт, сары май жана каймак өндүрөт — бийик тоо жайыттарынын сүтүнөн, салттуу ыкма менен.",
-        "hero.cta1":"Каталогду көрүү →","hero.cta2":"Биз менен байланышуу",
-        "stat.years":"жылдык тажрыйба","stat.products":"түрдүү өнүм","stat.natural":"табигый сүт","stat.regions":"облуска жеткирүү",
+        "hero.badge":"Завод 1940-жылы негизделген",
+        "hero.title":'Жаңы гана, <span class="hl">табигый гана</span>',
+        "hero.lead":"«Урсус» ЖАКтын бардык өнүмдөрү өсүмдүк майларсыз, табигый коровь сүтүнөн гана өндүрүлөт. Чүй өрөөнүнүн сырлары, сары майы, сүтү жана каймагы.",
+        "hero.cta1":"Өнүмдөрдү көрүү →","hero.cta2":"Дүң буйрутмалар",
+        "stat.years":"негизделген жыл","stat.products":"сыр түрү","stat.capacity":"тонна суткасына","stat.staff":"кызматкер",
         "prod.eyebrow":"Каталог","prod.title":"Биздин өнүмдөр",
-        "prod.sub":"Жаңы сырлар, бүтүн сүт, сары май жана каймак — Беловодсктогу заводубуздан күн сайын.",
-        "about.eyebrow":"Завод жөнүндө","about.title":"Беловодсктогу үй-бүлөлүк сүт заводу",
-        "about.p1":"URSUS — Беловодск, Чүй облусундагы сүт заводу. Биз Чүй өрөөнүнүн фермерлери менен түз иштешип, ар бир эртең менен жаңы сүт чогултабыз.",
-        "about.p2":"Сыр табигый түрдө бышат, сары май кичинекей партиялар менен бышырылат, ал эми каймак менен сүт аяр иштетилет — чыныгы даамын сактоо үчүн.",
-        "about.float":"литр сүт күнүнө",
+        "prod.sub":"Табигый сырлар, сары май, сүт жана каймак. Сырларыбыз назик, пластикалык консистенцияга жана мүнөздүү көздөргө ээ.",
+        "about.eyebrow":"Завод жөнүндө","about.title":"«Урсус» ЖАК сыр заводу",
+        "about.p1":"Завод 1940-жылы Чүй облусунун Московский районундагы Темен-Суу сүт заводунун базасында негизделген. Цехтер толук модернизацияланган, ал эми бренддин негизинде — ак аюу (лат. <i>Ursus</i>).",
+        "about.p2":"Сүт Московский жана Панфилов райондорунун фермерлеринен сатылып алынат. Заводдун кубаттуулугу — суткасына 30 тонна сүт өнүмү, сырларды 70тен ашуун кызматкер жасайт. «Урсус» өнүмү Кыргызстанда жана коңшу Казакстанда сатылат.",
+        "about.float":"жылдан бери","about.floatval":"1940",
         "qual.eyebrow":"Эмне үчүн URSUS","qual.title":"Ар бир таңгакта сапат",
-        "feat.1t":"Табигый сүт","feat.1d":"Жергиликтүү чарбалардын жаңы сүтү гана",
-        "feat.2t":"Консерванттарсыз","feat.2d":"Кошумчаларсыз таза курам",
-        "feat.3t":"Салттуу рецепттер","feat.3d":"Убакыт сынагынан өткөн технология",
-        "feat.4t":"Күн сайын жаңы","feat.4d":"Бүткүл Кыргызстанга жеткирүү",
+        "feat.1t":"Өсүмдүк майларсыз","feat.1d":"Табигый коровь сүтү гана",
+        "feat.2t":"Экологиялык таза сырьё","feat.2d":"Чүй өрөөнүнүн фермаларынын сүтү",
+        "feat.3t":"Сыр өндүрүү технологиясы","feat.3d":"Убакыт сынагынан өткөн рецептуралар",
+        "feat.4t":"Халал сертификаты","feat.4d":"Сертификацияланган өнүм",
         "cont.eyebrow":"Байланыш","cont.title":"Биз менен байланышыңыз","cont.sub":"Дүң жеткирүү, кызматташуу жана буйрутмалар — биз ар дайым байланыштабыз.",
-        "cont.addr":"Дарек","cont.addrval":"Беловодск шаары, Чүй облусу, Кыргызстан",
-        "cont.phone":"Телефон","cont.email":"Электрондук почта","cont.hours":"Иш убактысы","cont.hoursval":"Дүй–Ишм · 9:00–18:00",
-        "foot.rights":"© 2026 URSUS · Сүт заводу · Беловодск, Кыргызстан",
-        "filter.all":"Баары","filter.cheese":"Сыр","filter.milk":"Сүт","filter.butter":"Сары май","filter.cream":"Каймак"
+        "cont.addr":"Дарек","cont.addrval":"Чүй облусу, Московский району, Темен-Суу айылы, Сырзаводская көч., 3",
+        "cont.phone":"Кабылдама","cont.sales":"Коммерциялык бөлүм","cont.email":"Электрондук почта",
+        "foot.rights":"© 1940–2026 «Урсус» ЖАК · Сыр заводу · Темен-Суу, Чүй облусу, Кыргызстан",
+        "filter.all":"Баары","filter.cheese":"Сырлар","filter.butter":"Сары май","filter.dairy":"Сүт азыктары"
       },
       en: {
-        "brand.tag":"Dairy Factory",
+        "brand.tag":"Cheese Factory · since 1940",
         "nav.products":"Products","nav.about":"About","nav.quality":"Quality","nav.contact":"Contact",
-        "hero.badge":"Belovodsk · Chui Region",
-        "hero.title":'Pure dairy from the heart of the <span class="hl">Chui Valley</span>',
-        "hero.lead":"URSUS crafts cheese, milk, butter and cream in Belovodsk — from the milk of highland pastures, the traditional way.",
-        "hero.cta1":"View catalog →","hero.cta2":"Get in touch",
-        "stat.years":"years of experience","stat.products":"products","stat.natural":"natural milk","stat.regions":"regions served",
+        "hero.badge":"Factory founded in 1940",
+        "hero.title":'Only fresh, <span class="hl">only natural</span>',
+        "hero.lead":"Every URSUS product is made exclusively from natural cow's milk — with no vegetable fats. Cheese, butter, milk and cream from the Chui Valley.",
+        "hero.cta1":"View products →","hero.cta2":"Wholesale orders",
+        "stat.years":"year founded","stat.products":"cheese varieties","stat.capacity":"tonnes per day","stat.staff":"employees",
         "prod.eyebrow":"Catalog","prod.title":"Our products",
-        "prod.sub":"Fresh cheeses, whole milk, creamy butter and cream — made daily at our factory in Belovodsk.",
-        "about.eyebrow":"About","about.title":"A family dairy factory in Belovodsk",
-        "about.p1":"URSUS is a dairy factory in Belovodsk, Chui Region. We work directly with farmers across the Chui Valley and collect fresh milk every morning.",
-        "about.p2":"Our cheese is aged naturally, butter is churned in small batches, and milk and cream are gently processed — to keep the real, honest taste.",
-        "about.float":"litres of milk a day",
+        "prod.sub":"Natural cheese, butter, milk and cream. Our cheeses have a tender, supple texture and the classic cheese eyes.",
+        "about.eyebrow":"About","about.title":"URSUS cheese factory",
+        "about.p1":"Founded in 1940 on the site of the Temen-Suu dairy plant in the Moskovsky District of Chui Region. The production halls are fully modernised, and the brand is built around the polar bear (Latin <i>Ursus</i>).",
+        "about.p2":"Milk is sourced from farmers in the Moskovsky and Panfilov districts. The factory produces 30 tonnes of dairy a day, with a team of more than 70 people. URSUS products sell well in Kyrgyzstan and neighbouring Kazakhstan.",
+        "about.float":"on the market","about.floatval":"since 1940",
         "qual.eyebrow":"Why URSUS","qual.title":"Quality in every pack",
-        "feat.1t":"Natural milk","feat.1d":"Only fresh milk from local farms",
-        "feat.2t":"No preservatives","feat.2d":"Clean recipes, no additives",
-        "feat.3t":"Traditional recipes","feat.3d":"Time-tested craftsmanship",
-        "feat.4t":"Fresh every day","feat.4d":"Delivery across Kyrgyzstan",
+        "feat.1t":"No vegetable fats","feat.1d":"Natural cow's milk only",
+        "feat.2t":"Clean, eco raw materials","feat.2d":"Milk from Chui Valley farms",
+        "feat.3t":"Real cheesemaking","feat.3d":"Time-tested recipes",
+        "feat.4t":"Halal certified","feat.4d":"Certified production",
         "cont.eyebrow":"Contact","cont.title":"Get in touch","cont.sub":"Wholesale supply, partnerships and orders — we are always in touch.",
-        "cont.addr":"Address","cont.addrval":"Belovodsk, Chui Region, Kyrgyzstan",
-        "cont.phone":"Phone","cont.email":"Email","cont.hours":"Working hours","cont.hoursval":"Mon–Sat · 9:00–18:00",
-        "foot.rights":"© 2026 URSUS · Dairy Factory · Belovodsk, Kyrgyzstan",
-        "filter.all":"All","filter.cheese":"Cheese","filter.milk":"Milk","filter.butter":"Butter","filter.cream":"Cream"
+        "cont.addr":"Address","cont.addrval":"Syrzavodskaya St 3, Temen-Suu, Moskovsky District, Chui Region",
+        "cont.phone":"Reception","cont.sales":"Sales department","cont.email":"Email",
+        "foot.rights":"© 1940–2026 URSUS · Cheese Factory · Temen-Suu, Chui Region, Kyrgyzstan",
+        "filter.all":"All","filter.cheese":"Cheese","filter.butter":"Butter","filter.dairy":"Dairy"
       }
     };
 
-    /* ---------- Catalog (no prices) ---------- */
+    /* ---------- Catalog — real ЗАО «Урсус» product line ---------- */
+    const FAT45 = {ru:"Жир 45% · 90 сут",ky:"Май 45% · 90 күн",en:"45% fat · 90 days"};
     const PRODUCTS = [
-      { cat:"cheese", img:"cheese.jpg", size:{ru:"≈ 1 кг",ky:"≈ 1 кг",en:"≈ 1 kg"},
-        name:{ru:"Сыр «Ursus Gold»",ky:"«Ursus Gold» сыры",en:"Ursus Gold Cheese"},
-        desc:{ru:"Твёрдый выдержанный сыр с насыщенным вкусом.",ky:"Бай даамдуу катуу, бышкан сыр.",en:"Aged hard cheese with a rich, full flavour."}},
-      { cat:"cheese", img:"cheese.jpg", size:{ru:"≈ 1 кг",ky:"≈ 1 кг",en:"≈ 1 kg"},
-        name:{ru:"Эмменталь беловодский",ky:"Беловодск эмменталы",en:"Belovodsk Emmental"},
-        desc:{ru:"Полутвёрдый сыр с крупными глазками.",ky:"Чоң көздөрү бар жарым катуу сыр.",en:"Semi-hard cheese with classic large holes."}},
-      { cat:"cheese", img:"cheese.jpg", size:{ru:"500 г",ky:"500 г",en:"500 g"},
-        name:{ru:"Сулугуни",ky:"Сулугуни",en:"Suluguni"},
-        desc:{ru:"Свежий рассольный сыр, мягкий и тянущийся.",ky:"Жаңы, жумшак, созулган сыр.",en:"Fresh brined cheese, soft and stretchy."}},
-      { cat:"cheese", img:"cheese.jpg", size:{ru:"200 г",ky:"200 г",en:"200 g"},
-        name:{ru:"Чечил копчёный",ky:"Ысталган чечил",en:"Smoked Chechil"},
-        desc:{ru:"Копчёный сыр-косичка к чаю.",ky:"Чайга ысталган өрмө сыр.",en:"Smoked string cheese braid."}},
+      { cat:"cheese", img:"cheese-blocks.jpg", size:FAT45,
+        name:{ru:"Сыр Голландский",ky:"Голландия сыры",en:"Dutch (Gollandsky) Cheese"},
+        desc:{ru:"Классический полутвёрдый сыр с нежным сливочным вкусом.",ky:"Жумшак, сливкалуу даамы бар классикалык жарым катуу сыр.",en:"Classic semi-hard cheese with a mild creamy taste."}},
+      { cat:"cheese", img:"cheese.jpg", size:FAT45,
+        name:{ru:"Сыр Голландский классический",ky:"Голландия классикалык сыры",en:"Dutch Classic"},
+        desc:{ru:"Плотный сыр с характерным рисунком и лёгкой кислинкой.",ky:"Мүнөздүү көздөрү жана жеңил кычкылдыгы бар коюу сыр.",en:"Firm cheese with the classic eyes and a light tang."}},
+      { cat:"cheese", img:"cheese-plate.png", size:FAT45,
+        name:{ru:"Сыр Голландский сливочный",ky:"Голландия сливкалуу сыры",en:"Dutch Creamy"},
+        desc:{ru:"Мягкий вариант голландского с насыщенным сливочным вкусом.",ky:"Сливкалуу даамы бай, жумшак голландия сыры.",en:"A softer Dutch with a rich, buttery flavour."}},
+      { cat:"cheese", img:"cheese-wheels.png", size:FAT45,
+        name:{ru:"Сыр Пошехонский",ky:"Пошехон сыры",en:"Poshekhonsky Cheese"},
+        desc:{ru:"Полутвёрдый сыр в восковой оболочке, узнаваемый вкус.",ky:"Балмум кабыктагы, тааныш даамдуу жарым катуу сыр.",en:"Semi-hard cheese in a wax coat with a recognisable taste."}},
+      { cat:"cheese", img:"cheese-board.png", size:FAT45,
+        name:{ru:"Сыр Костромской",ky:"Кострома сыры",en:"Kostromskoy Cheese"},
+        desc:{ru:"Нежный сыр с тонким ароматом и пластичной консистенцией.",ky:"Назик жыттуу, пластикалык консистенциядагы сыр.",en:"Tender cheese with a delicate aroma and supple texture."}},
+      { cat:"cheese", img:"cheese-eco.png", size:FAT45,
+        name:{ru:"Сыр Рижский",ky:"Рига сыры",en:"Rizhsky Cheese"},
+        desc:{ru:"Ароматный полутвёрдый сыр в традициях прибалтийской школы.",ky:"Балтика мектебинин салтындагы жыттуу жарым катуу сыр.",en:"Aromatic semi-hard cheese in the Baltic tradition."}},
+      { cat:"cheese", img:"cheese-blocks.jpg", size:FAT45,
+        name:{ru:"Сыр Алтайский",ky:"Алтай сыры",en:"Altaysky Cheese"},
+        desc:{ru:"Твёрдый сыр с выраженным сырным вкусом и ароматом.",ky:"Айкын сыр даамы жана жыты бар катуу сыр.",en:"Hard cheese with a pronounced cheesy flavour."}},
+      { cat:"cheese", img:"wheel.jpg", size:FAT45,
+        name:{ru:"Сыр Эдам",ky:"Эдам сыры",en:"Edam Cheese"},
+        desc:{ru:"Полутвёрдый сыр с мягким, чуть ореховым вкусом.",ky:"Жумшак, бир аз жаңгактуу даамы бар жарым катуу сыр.",en:"Semi-hard cheese with a mild, slightly nutty taste."}},
+      { cat:"cheese", img:"cheese-board.png", size:FAT45,
+        name:{ru:"Сыр Теменсуйский",ky:"Темен-Суу сыры",en:"Temensuysky Cheese"},
+        desc:{ru:"Фирменный сыр завода, названный в честь села Темен-Суу.",ky:"Темен-Суу айылынын урматына аталган заводдун фирмалык сыры.",en:"The factory's signature cheese, named after Temen-Suu village."}},
+      { cat:"cheese", img:"cheese.jpg", size:{ru:"Копчёный",ky:"Ысталган",en:"Smoked"},
+        name:{ru:"Сыр Колбасный копчёный",ky:"Ысталган колбаса сыры",en:"Smoked Sausage Cheese"},
+        desc:{ru:"Плавленый копчёный сыр с насыщенным ароматом дымка.",ky:"Түтүндүн бай жыты бар эритилген ысталган сыр.",en:"Smoked processed cheese with a rich smoky aroma."}},
 
-      { cat:"milk", img:"milk.jpg", size:{ru:"1 л",ky:"1 л",en:"1 L"},
-        name:{ru:"Молоко цельное 3,2%",ky:"Бүтүн сүт 3,2%",en:"Whole Milk 3.2%"},
-        desc:{ru:"Пастеризованное молоко из свежего надоя.",ky:"Жаңы саалган сүттөн пастеризацияланган.",en:"Pasteurised milk from the fresh morning yield."}},
-      { cat:"milk", img:"milk.jpg", size:{ru:"1 л",ky:"1 л",en:"1 L"},
-        name:{ru:"Молоко 2,5%",ky:"Сүт 2,5%",en:"Milk 2.5%"},
-        desc:{ru:"Лёгкое молоко для каждого дня.",ky:"Күн сайын ичүүгө жеңил сүт.",en:"Light everyday milk."}},
-      { cat:"milk", img:"milk.jpg", size:{ru:"0,9 л",ky:"0,9 л",en:"0.9 L"},
-        name:{ru:"Молоко топлёное 4%",ky:"Кайнатылган сүт 4%",en:"Baked Milk 4%"},
-        desc:{ru:"Топлёное молоко с карамельным оттенком.",ky:"Карамель түстүү кайнатылган сүт.",en:"Baked milk with a caramel note."}},
+      { cat:"butter", img:"butter.jpg", size:{ru:"82,5% · 200 г",ky:"82,5% · 200 г",en:"82.5% · 200 g"},
+        name:{ru:"Масло Крестьянское сливочное",ky:"Дыйкан сары майы",en:"Krestyanskoe Butter"},
+        desc:{ru:"Сливочное масло из натурального коровьего молока по ГОСТ.",ky:"ГОСТ боюнча табигый коровь сүтүнөн сары май.",en:"Creamery butter from natural cow's milk, made to GOST."}},
 
-      { cat:"butter", img:"butter.jpg", size:{ru:"200 г",ky:"200 г",en:"200 g"},
-        name:{ru:"Масло сливочное 82,5%",ky:"Сары май 82,5%",en:"Butter 82.5%"},
-        desc:{ru:"Натуральное масло из свежих сливок.",ky:"Жаңы каймактан табигый сары май.",en:"Natural butter from fresh cream."}},
-      { cat:"butter", img:"butter.jpg", size:{ru:"300 г",ky:"300 г",en:"300 g"},
-        name:{ru:"Масло топлёное (гхи)",ky:"Эритилген сары май (гхи)",en:"Ghee (Clarified Butter)"},
-        desc:{ru:"Ароматное топлёное масло для готовки.",ky:"Тамак жасоого жыпар жыттуу май.",en:"Aromatic clarified butter for cooking."}},
-
-      { cat:"cream", img:"cream.jpg", size:{ru:"250 мл",ky:"250 мл",en:"250 ml"},
-        name:{ru:"Сливки 20%",ky:"Каймак 20%",en:"Cream 20%"},
-        desc:{ru:"Нежные сливки для кофе и соусов.",ky:"Кофе менен соустарга жумшак каймак.",en:"Smooth cream for coffee and sauces."}},
-      { cat:"cream", img:"cream.jpg", size:{ru:"250 мл",ky:"250 мл",en:"250 ml"},
-        name:{ru:"Сливки 33% для взбивания",ky:"Көпүртүүчү каймак 33%",en:"Whipping Cream 33%"},
-        desc:{ru:"Густые сливки, отлично взбиваются.",ky:"Коюу каймак, жакшы көпүрөт.",en:"Rich cream that whips up perfectly."}},
-      { cat:"cream", img:"cream.jpg", size:{ru:"400 г",ky:"400 г",en:"400 g"},
-        name:{ru:"Сметана 20%",ky:"Сметана 20%",en:"Sour Cream 20%"},
-        desc:{ru:"Классическая сметана из натуральных сливок.",ky:"Табигый каймактан классикалык сметана.",en:"Classic sour cream from natural cream."}}
+      { cat:"dairy", img:"milk.jpg", size:{ru:"Питьевое",ky:"Ичүүчү",en:"Drinking"},
+        name:{ru:"Молоко питьевое",ky:"Ичүүчү сүт",en:"Drinking Milk"},
+        desc:{ru:"Натуральный поставщик кальция и фосфора — около ста ценных веществ.",ky:"Кальций менен фосфордун табигый булагы — жүзгө жакын баалуу зат.",en:"A natural source of calcium and phosphorus — around a hundred valuable nutrients."}},
+      { cat:"dairy", img:"cream.jpg", size:{ru:"Из коровьего молока",ky:"Коровь сүтүнөн",en:"From cow's milk"},
+        name:{ru:"Сливки",ky:"Каймак",en:"Cream"},
+        desc:{ru:"Вырабатываются сепарированием натурального молока. Идеальны для чая и кофе.",ky:"Табигый сүттү сепарациялоо менен алынат. Чай менен кофеге эң сонун.",en:"Separated from natural milk. Perfect for tea and coffee."}}
     ];
 
     /* ---------- State + render ---------- */
@@ -510,7 +518,7 @@
     function renderFilters() {
       const dict = I18N[lang];
       const box = document.getElementById("filters");
-      const items = [["all","filter.all"],["cheese","filter.cheese"],["milk","filter.milk"],["butter","filter.butter"],["cream","filter.cream"]];
+      const items = [["all","filter.all"],["cheese","filter.cheese"],["butter","filter.butter"],["dairy","filter.dairy"]];
       box.innerHTML = items.map(([key,tk]) =>
         `<button data-f="${key}" class="${filter===key?'active':''}">${dict[tk]}</button>`).join("");
       box.querySelectorAll("button").forEach(b =>
