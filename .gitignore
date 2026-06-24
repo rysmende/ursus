@@ -5,3 +5,10 @@ cand/
 .DS_Store
 Thumbs.db
 *.swp
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
