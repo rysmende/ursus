@@ -1,13 +1,15 @@
 /* ============================================================
    URSUS — product catalog (real ЗАО «Урсус» / TM «Темен Суу» line)
-   Shared by index.html (featured) and catalog.html (full grid).
-   imgs[] = gallery (first image is the card thumbnail). imgCover = photo
-   that fills the frame instead of a transparent cutout.
+   imgs[] = gallery; first image is the card thumbnail.
+   Display is decided by extension: .png = transparent cutout (floats),
+   .jpg = full photo (fills the frame).
+   cat: cheese | butter | milk | cream
    ============================================================ */
 window.PRODUCTS = [
   /* ---------------- CHEESE ---------------- */
   {
-    id: "gollandsky-klass", cat: "cheese", imgs: ["p-gollandsky-klass-1.png", "p-gollandsky-klass-2.png"],
+    id: "gollandsky-klass", cat: "cheese",
+    imgs: ["p-gollandsky-klass-1.png", "p-gollandsky-klass-2.png", "p-gollandsky-klass-3.png", "p-gollandsky-klass-4.jpg"],
     badge: "hit", fat: "45%", shelf: "90",
     name: { ru: "Голландский классический", ky: "Голландия классикалык", en: "Gollandsky Classic" },
     desc: {
@@ -17,7 +19,8 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "gollandsky-sliv", cat: "cheese", imgs: ["p-gollandsky-sliv-1.png", "p-gollandsky-sliv-2.png"],
+    id: "gollandsky-sliv", cat: "cheese",
+    imgs: ["p-gollandsky-sliv-1.png", "p-gollandsky-sliv-2.png", "p-gollandsky-sliv-3.jpg", "p-gollandsky-sliv-4.jpg"],
     badge: "hit", fat: "45%", shelf: "90",
     name: { ru: "Голландский сливочный", ky: "Голландия сливкалуу", en: "Gollandsky Creamy" },
     desc: {
@@ -27,7 +30,8 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "gollandsky-elite", cat: "cheese", imgs: ["p-gollandsky-elite-1.png"],
+    id: "gollandsky-elite", cat: "cheese",
+    imgs: ["p-gollandsky-elite-1.png", "p-gollandsky-elite-2.png", "p-gollandsky-elite-3.png"],
     badge: "premium", fat: "50%", shelf: "90",
     name: { ru: "Голландский Элитный", ky: "Голландия Элиталык", en: "Gollandsky Elite" },
     desc: {
@@ -127,7 +131,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "kolbasny", cat: "cheese", imgs: ["p-kolbasny-1.png"],
+    id: "kolbasny", cat: "cheese", imgs: ["p-kolbasny-1.png", "p-kolbasny-2.jpg"],
     badge: "smoked", fat: "40%", shelf: "75",
     name: { ru: "Колбасный копчёный", ky: "Ысталган колбаса сыр", en: "Smoked Sausage Cheese" },
     desc: {
@@ -138,7 +142,7 @@ window.PRODUCTS = [
   },
   /* ---------------- BUTTER ---------------- */
   {
-    id: "butter", cat: "butter", imgs: ["p-butter-1.png", "p-butter-2.png"],
+    id: "butter", cat: "butter", imgs: ["p-butter-1.jpg", "p-butter-2.jpg", "p-butter-3.jpg"],
     badge: "hit", fat: "72.5%", shelf: "35",
     name: { ru: "Масло Крестьянское", ky: "Дыйкан сары майы", en: "Krestyanskoe Butter" },
     desc: {
@@ -147,9 +151,9 @@ window.PRODUCTS = [
       en: "Creamery butter from natural cream, 72.5% fat, 200 g pack. Also made at 82.5%. GOST."
     }
   },
-  /* ---------------- DAIRY ---------------- */
+  /* ---------------- MILK ---------------- */
   {
-    id: "milk", cat: "dairy", imgs: ["p-milk-1.png"],
+    id: "milk", cat: "milk", imgs: ["p-milk-1.jpg", "p-milk-2.jpg"],
     badge: "", fat: "3.2%", shelf: "",
     name: { ru: "Молоко питьевое", ky: "Ичүүчү сүт", en: "Drinking Milk" },
     desc: {
@@ -158,8 +162,9 @@ window.PRODUCTS = [
       en: "Pasteurized cow's milk 3.2% in a 1 L film pouch — a natural source of calcium."
     }
   },
+  /* ---------------- CREAM ---------------- */
   {
-    id: "cream", cat: "dairy", imgs: ["life-milk.jpg"], imgCover: true,
+    id: "cream", cat: "cream", imgs: ["life-milk.jpg"],
     badge: "", fat: "20–40%", shelf: "",
     name: { ru: "Сливки пастеризованные", ky: "Пастеризацияланган каймак", en: "Pasteurized Cream" },
     desc: {

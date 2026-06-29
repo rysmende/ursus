@@ -50,7 +50,7 @@
       /* ---- Catalog ---- */
       "cat.title": "Каталог продукции",
       "cat.sub": "Натуральные твёрдые сыры, сливочное масло, молоко и сливки. Жирность и сроки указаны для справки; точные спецификации — у отдела продаж.",
-      "cat.f.all": "Все", "cat.f.cheese": "Сыры", "cat.f.butter": "Масло", "cat.f.dairy": "Молоко и сливки",
+      "cat.f.all": "Все", "cat.f.cheese": "Сыры", "cat.f.butter": "Масло", "cat.f.milk": "Молоко", "cat.f.cream": "Сливки",
       "cat.fat": "жир", "cat.shelf": "срок", "cat.days": "сут",
       "cat.note": "Цены оптовые — уточняйте в отделе продаж. Возможна фасовка под заказ.",
 
@@ -132,7 +132,7 @@
 
       "cat.title": "Өнүмдөр каталогу",
       "cat.sub": "Табигый катуу сырлар, сары май, сүт жана каймак. Майлуулук жана мөөнөттөр маалымат үчүн; так спецификация — сатуу бөлүмүндө.",
-      "cat.f.all": "Баары", "cat.f.cheese": "Сырлар", "cat.f.butter": "Май", "cat.f.dairy": "Сүт жана каймак",
+      "cat.f.all": "Баары", "cat.f.cheese": "Сырлар", "cat.f.butter": "Май", "cat.f.milk": "Сүт", "cat.f.cream": "Каймак",
       "cat.fat": "май", "cat.shelf": "мөөнөт", "cat.days": "күн",
       "cat.note": "Баалар дүң — сатуу бөлүмүнөн тактаңыз. Буйрутма боюнча таңгактоо мүмкүн.",
 
@@ -210,7 +210,7 @@
 
       "cat.title": "Product catalog",
       "cat.sub": "Natural hard cheeses, creamery butter, milk and cream. Fat and shelf life are indicative; exact specs come from the sales department.",
-      "cat.f.all": "All", "cat.f.cheese": "Cheese", "cat.f.butter": "Butter", "cat.f.dairy": "Milk & cream",
+      "cat.f.all": "All", "cat.f.cheese": "Cheese", "cat.f.butter": "Butter", "cat.f.milk": "Milk", "cat.f.cream": "Cream",
       "cat.fat": "fat", "cat.shelf": "shelf", "cat.days": "d",
       "cat.note": "Wholesale pricing — please ask the sales department. Custom packing available.",
 
@@ -277,19 +277,28 @@
     return `<span class="tag ${cls}">${window.BADGES[p.badge][lang]}</span>`;
   }
   function imgsOf(p) { return (p.imgs && p.imgs.length) ? p.imgs : [p.img]; }
+  function isCut(src) { return /\.png(\?|$)/i.test(src); }
   function cardHtml(p, i) {
-    const cls = p.imgCover ? "" : "cut";
     const imgs = imgsOf(p);
+    const multi = imgs.length > 1;
     const pills = [];
     if (p.fat) pills.push(`<span class="pill gold">${t("cat.fat")} ${p.fat}</span>`);
     if (p.shelf) pills.push(`<span class="pill">${t("cat.shelf")} ${p.shelf} ${t("cat.days")}</span>`);
-    const gal = imgs.length > 1 ? `<span class="gal-badge" aria-hidden="true">📷 ${imgs.length}</span>` : "";
+    const slides = imgs.map((s, k) =>
+      `<img class="slide ${isCut(s) ? "cut" : "cover"}" src="images/${s}" alt="${p.name[lang]}" loading="${k === 0 ? "eager" : "lazy"}" />`).join("");
+    const arrows = multi
+      ? '<button class="car-arr car-prev" aria-label="‹" tabindex="-1">‹</button><button class="car-arr car-next" aria-label="›" tabindex="-1">›</button>' : "";
+    const dots = multi
+      ? `<div class="car-dots">${imgs.map((_, k) => `<span class="dot ${k === 0 ? "on" : ""}"></span>`).join("")}</div>` : "";
+    const gal = multi ? `<span class="gal-badge" aria-hidden="true">📷 ${imgs.length}</span>` : "";
     return `
       <article class="card reveal" style="transition-delay:${Math.min(i * 45, 300)}ms">
-        <div class="ph" data-gallery="${p.id}" role="button" tabindex="0" aria-label="${p.name[lang]}">
-          <img src="images/${imgs[0]}" class="${cls}" alt="${p.name[lang]}" loading="lazy" width="600" height="450" />
+        <div class="ph" data-pid="${p.id}" role="button" tabindex="0" aria-label="${p.name[lang]}">
+          <div class="track">${slides}</div>
           ${badgeHtml(p)}
           ${gal}
+          ${arrows}
+          ${dots}
           <span class="zoom" aria-hidden="true">🔍</span>
         </div>
         <div class="body">
@@ -304,11 +313,12 @@
     if (!box) return;
     box.innerHTML = list.map((p, i) => cardHtml(p, i)).join("");
     observeReveals();
+    initCarousels();
   }
   function renderFilters() {
     const box = document.getElementById("filters");
     if (!box) return;
-    const items = [["all", "cat.f.all"], ["cheese", "cat.f.cheese"], ["butter", "cat.f.butter"], ["dairy", "cat.f.dairy"]];
+    const items = [["all", "cat.f.all"], ["cheese", "cat.f.cheese"], ["butter", "cat.f.butter"], ["milk", "cat.f.milk"], ["cream", "cat.f.cream"]];
     box.innerHTML = items.map(([k, tk]) => `<button data-f="${k}" class="${filter === k ? "active" : ""}">${t(tk)}</button>`).join("");
     box.querySelectorAll("button").forEach(b => b.onclick = () => { filter = b.dataset.f; renderFilters(); renderCatalog(); });
   }
@@ -358,8 +368,54 @@
     entries.forEach(e => { if (e.isIntersecting) { countUp(); countObserver.unobserve(e.target); } });
   }, { threshold: 0.4 });
 
+  /* ---------------- In-card carousel ---------------- */
+  let carousels = [];
+  const carIO = ("IntersectionObserver" in window) ? new IntersectionObserver(es => {
+    es.forEach(e => { const c = e.target.__car; if (!c) return; c.vis = e.isIntersecting; e.isIntersecting ? c.play() : c.pause(); });
+  }, { threshold: 0.35 }) : null;
+
+  function Carousel(ph, idx) {
+    this.ph = ph;
+    this.track = ph.querySelector(".track");
+    this.n = ph.querySelectorAll(".slide").length;
+    this.dots = [].slice.call(ph.querySelectorAll(".dot"));
+    this.i = 0; this.delay = (idx % 5) * 600; this.vis = false; this.timer = null;
+    ph.__car = this;
+    const self = this;
+    const prev = ph.querySelector(".car-prev"), next = ph.querySelector(".car-next");
+    if (prev) prev.addEventListener("click", e => { e.stopPropagation(); self.step(-1); self.bump(); });
+    if (next) next.addEventListener("click", e => { e.stopPropagation(); self.step(1); self.bump(); });
+    this.dots.forEach((d, k) => d.addEventListener("click", e => { e.stopPropagation(); self.go(k); self.bump(); }));
+    ph.addEventListener("mouseenter", () => self.pause());
+    ph.addEventListener("mouseleave", () => self.play());
+    if (carIO) carIO.observe(ph);
+  }
+  Carousel.prototype.go = function (k, anim) {
+    this.i = (k + this.n) % this.n;
+    if (anim === false) this.track.style.transition = "none";
+    this.track.style.transform = "translateX(" + (-this.i * 100) + "%)";
+    if (anim === false) requestAnimationFrame(() => { this.track.style.transition = ""; });
+    this.dots.forEach((d, j) => d.classList.toggle("on", j === this.i));
+  };
+  Carousel.prototype.step = function (d) { this.go(this.i + d); };
+  Carousel.prototype.play = function () {
+    if (reduce || this.n < 2 || this.vis === false) return;
+    this.pause();
+    const self = this;
+    this.timer = setTimeout(function tick() { self.step(1); self.timer = setTimeout(tick, 4200); }, 4200 + this.delay);
+  };
+  Carousel.prototype.pause = function () { clearTimeout(this.timer); this.timer = null; };
+  Carousel.prototype.destroy = function () { this.pause(); if (carIO) carIO.unobserve(this.ph); };
+  function initCarousels() {
+    carousels.forEach(c => c.destroy()); carousels = [];
+    let idx = 0;
+    document.querySelectorAll(".ph[data-pid]").forEach(ph => {
+      if (ph.querySelectorAll(".slide").length > 1) carousels.push(new Carousel(ph, idx++));
+    });
+  }
+
   /* ---------------- Gallery lightbox ---------------- */
-  let lb = null, lbState = { imgs: [], i: 0, cover: false };
+  let lb = null, lbState = { imgs: [], i: 0 };
   function buildLightbox() {
     if (lb) return;
     lb = document.createElement("div");
@@ -384,10 +440,10 @@
     });
   }
   function renderLB() {
-    const { imgs, i, cover } = lbState;
+    const { imgs, i } = lbState;
     const img = lb.querySelector("#lbImg");
     img.src = "images/" + imgs[i];
-    img.className = cover ? "cover" : "";
+    img.className = isCut(imgs[i]) ? "" : "cover";
     lb.querySelector("#lbCount").textContent = imgs.length > 1 ? (i + 1) + " / " + imgs.length : "";
     const multi = imgs.length > 1;
     lb.querySelector(".lb-prev").style.display = multi ? "" : "none";
@@ -398,11 +454,11 @@
     tw.querySelectorAll(".lb-thumb").forEach(b => b.onclick = () => { lbState.i = +b.dataset.k; renderLB(); });
   }
   function step(d) { lbState.i = (lbState.i + d + lbState.imgs.length) % lbState.imgs.length; renderLB(); }
-  function openGallery(pid) {
+  function openGallery(pid, start) {
     const p = window.PRODUCTS && window.PRODUCTS.find(x => x.id === pid);
     if (!p) return;
     buildLightbox();
-    lbState = { imgs: imgsOf(p), i: 0, cover: !!p.imgCover };
+    lbState = { imgs: imgsOf(p), i: start || 0 };
     lb.querySelector("#lbTitle").textContent = p.name[lang];
     renderLB();
     lb.hidden = false; document.body.style.overflow = "hidden";
@@ -410,13 +466,13 @@
   function closeGallery() { if (lb) { lb.hidden = true; document.body.style.overflow = ""; } }
   function initGallery() {
     document.addEventListener("click", e => {
-      const ph = e.target.closest("[data-gallery]");
-      if (ph) openGallery(ph.getAttribute("data-gallery"));
+      const ph = e.target.closest(".ph[data-pid]");
+      if (ph) openGallery(ph.getAttribute("data-pid"), ph.__car ? ph.__car.i : 0);
     });
     document.addEventListener("keydown", e => {
       if (e.key !== "Enter" && e.key !== " ") return;
-      const ph = document.activeElement && document.activeElement.closest && document.activeElement.closest("[data-gallery]");
-      if (ph) { e.preventDefault(); openGallery(ph.getAttribute("data-gallery")); }
+      const ph = document.activeElement && document.activeElement.closest && document.activeElement.closest(".ph[data-pid]");
+      if (ph) { e.preventDefault(); openGallery(ph.getAttribute("data-pid"), ph.__car ? ph.__car.i : 0); }
     });
   }
 
@@ -437,6 +493,11 @@
   function init() {
     initChrome();
     initGallery();
+    // deep-link: catalog.html?cat=cheese|butter|milk|cream applies a filter on load
+    try {
+      const c = new URLSearchParams(location.search).get("cat");
+      if (c && ["all", "cheese", "butter", "milk", "cream"].indexOf(c) >= 0) filter = c;
+    } catch (e) { /* no-op */ }
     applyI18n();
     renderFilters();
     renderCatalog();

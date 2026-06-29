@@ -63,11 +63,13 @@
 
         <form class="form reveal" id="contactForm">
           <h3 style="font-family:Unbounded;margin-bottom:16px" data-i18n="cont.formTitle">Написать нам</h3>
-          <!-- Web3Forms: replace the access_key with your own from https://web3forms.com (free).
-               Until then the form falls back to opening the visitor's email app. -->
-          <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY" />
-          <input type="hidden" name="subject" value="Заявка с сайта ursus.kg" />
-          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+          <!-- Uses FormSubmit.co — no signup, no API key. The FIRST submission sends a
+               one-time activation link to zaoursus2003@gmail.com; once you click it,
+               every message is delivered straight to that inbox. -->
+          <input type="hidden" name="_subject" value="Заявка с сайта ursus.kg" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
           <div class="field">
             <label data-i18n="cont.fName">Ваше имя</label>
             <input type="text" name="name" required data-i18n-ph="cont.fName" />
@@ -116,10 +118,10 @@
         <div>
           <h4 data-i18n="foot.products">Продукция</h4>
           <ul>
-            <li><a href="catalog.html">Голландский сыр</a></li>
-            <li><a href="catalog.html">Костромской · Пошехонский</a></li>
-            <li><a href="catalog.html">Масло сливочное</a></li>
-            <li><a href="catalog.html">Молоко и сливки</a></li>
+            <li><a href="catalog.html?cat=cheese" data-i18n="cat.f.cheese">Сыры</a></li>
+            <li><a href="catalog.html?cat=butter" data-i18n="cat.f.butter">Масло</a></li>
+            <li><a href="catalog.html?cat=milk" data-i18n="cat.f.milk">Молоко</a></li>
+            <li><a href="catalog.html?cat=cream" data-i18n="cat.f.cream">Сливки</a></li>
           </ul>
         </div>
         <div>
@@ -141,36 +143,35 @@
   <script src="assets/js/products.js"></script>
   <script src="assets/js/site.js"></script>
   <script>
-    /* Contact form — submits to Web3Forms if a key is set, else falls back to mailto. */
+    /* Contact form → FormSubmit.co (no backend, no signup).
+       First submission emails a one-time activation link to the inbox; after it's
+       confirmed every message arrives straight to Gmail. On any network failure we
+       fall back to opening the visitor's own mail app. */
     (function () {
       const form = document.getElementById("contactForm");
       const status = document.getElementById("formStatus");
       if (!form) return;
+      const ENDPOINT = "https://formsubmit.co/ajax/zaoursus2003@gmail.com";
+      const val = (n) => { const el = form.elements[n]; return el ? el.value : ""; };
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const key = form.access_key.value;
         const T = window.URSUS ? window.URSUS.t : (k) => k;
-        const data = {
-          name: form.name.value, contact: form.contact.value, message: form.message.value
-        };
-        if (!key || key.indexOf("YOUR-") === 0) {
-          // No key yet → open the visitor's mail client as a fallback.
-          const body = encodeURIComponent(`${data.name} (${data.contact}):\n\n${data.message}`);
-          window.location.href = `mailto:zaoursus2003@gmail.com?subject=Заявка с сайта&body=${body}`;
-          return;
-        }
-        status.textContent = "…"; status.className = "form-status";
+        const btn = form.querySelector("button[type=submit]");
+        status.textContent = "…"; status.className = "form-status"; btn.disabled = true;
         try {
-          const res = await fetch("https://api.web3forms.com/submit", {
+          const res = await fetch(ENDPOINT, {
             method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
             body: JSON.stringify(Object.fromEntries(new FormData(form)))
           });
           const json = await res.json();
-          if (json.success) { status.textContent = T("cont.fOk"); status.className = "form-status ok"; form.reset(); }
-          else throw new Error(json.message);
+          if (json.success === true || json.success === "true") {
+            status.textContent = T("cont.fOk"); status.className = "form-status ok"; form.reset();
+          } else throw new Error(json.message || "failed");
         } catch (err) {
+          const body = encodeURIComponent(`${val("name")} (${val("contact")}):\n\n${val("message")}`);
+          window.location.href = `mailto:zaoursus2003@gmail.com?subject=Заявка с сайта&body=${body}`;
           status.textContent = T("cont.fErr"); status.className = "form-status err";
-        }
+        } finally { btn.disabled = false; }
       });
     })();
   </script>
