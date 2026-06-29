@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Контакты — ЗАО «Урсус», сырный завод · Темен-Суу</title>
+  <meta name="description" content="Контакты ЗАО «Урсус»: с. Темен-Суу, ул. Сырзаводская, 3, Московский район, Чуйская область. Приёмная +996 (312) 45-35-62, отдел продаж, e-mail zaoursus2003@gmail.com." />
+  <link rel="canonical" href="https://ursus.kg/contact.html" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Контакты ЗАО «Урсус»" />
+  <meta property="og:description" content="Оптовые поставки и заказы. Темен-Суу, Чуйская область, Кыргызстан." />
+  <meta property="og:image" content="https://ursus.kg/images/assortment.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+</head>
+<body>
+  <header class="site" id="header">
+    <div class="wrap nav">
+      <a href="index.html" class="brand">
+        <img class="mark" src="images/logo.png" alt="URSUS — белый медведь" />
+        <span>URSUS<small data-i18n="foot.madein">Сделано в Кыргызстане 🇰🇬</small></span>
+      </a>
+      <nav style="position:relative">
+        <div class="links" id="navlinks">
+          <a href="index.html" data-i18n="nav.home">Главная</a>
+          <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
+          <a href="about.html" data-i18n="nav.about">О заводе</a>
+          <a href="news.html" data-i18n="nav.news">Новости</a>
+          <a href="contact.html" class="active" data-i18n="nav.contact">Контакты</a>
+        </div>
+      </nav>
+      <div class="right">
+        <a href="contact.html" class="btn btn-primary" style="padding:10px 18px" data-i18n="nav.order">Оптовый заказ</a>
+        <div class="langs" id="langs">
+          <button data-lang="ru">RU</button><button data-lang="ky">KY</button><button data-lang="en">EN</button>
+        </div>
+        <button class="burger" id="burger" aria-label="menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="crumb reveal"><a href="index.html" data-i18n="nav.home">Главная</a> / <span data-i18n="nav.contact">Контакты</span></div>
+        <h1 class="reveal" data-i18n="cont.title">Контакты</h1>
+        <p class="reveal" data-i18n="cont.sub"></p>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap contact-grid">
+        <div class="info-list reveal">
+          <div class="info"><div class="ii">📍</div><div><b data-i18n="cont.addr">Адрес</b><span data-i18n="cont.addrval"></span></div></div>
+          <div class="info"><div class="ii">📞</div><div><b data-i18n="cont.phone">Приёмная</b><span><a href="tel:+996312453562">+996 (312) 45-35-62</a></span></div></div>
+          <div class="info"><div class="ii">🤝</div><div><b data-i18n="cont.sales">Отдел продаж</b><span><a href="tel:+996772546921">+996 772 54-69-21</a></span></div></div>
+          <div class="info"><div class="ii">🧾</div><div><b data-i18n="cont.acc">Бухгалтерия</b><span><a href="tel:+996313158750">+996 (3131) 5-87-50</a></span></div></div>
+          <div class="info"><div class="ii">✉️</div><div><b data-i18n="cont.email">Эл. почта</b><span><a href="mailto:zaoursus2003@gmail.com">zaoursus2003@gmail.com</a></span></div></div>
+        </div>
+
+        <form class="form reveal" id="contactForm">
+          <h3 style="font-family:Unbounded;margin-bottom:16px" data-i18n="cont.formTitle">Написать нам</h3>
+          <!-- Web3Forms: replace the access_key with your own from https://web3forms.com (free).
+               Until then the form falls back to opening the visitor's email app. -->
+          <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY" />
+          <input type="hidden" name="subject" value="Заявка с сайта ursus.kg" />
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="field">
+            <label data-i18n="cont.fName">Ваше имя</label>
+            <input type="text" name="name" required data-i18n-ph="cont.fName" />
+          </div>
+          <div class="field">
+            <label data-i18n="cont.fContact">Телефон или e-mail</label>
+            <input type="text" name="contact" required data-i18n-ph="cont.fContact" />
+          </div>
+          <div class="field">
+            <label data-i18n="cont.fMsg">Сообщение</label>
+            <textarea name="message" required data-i18n-ph="cont.fMsg"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" data-i18n="cont.fSend">Отправить заявку</button>
+          <p class="note" data-i18n="cont.fNote"></p>
+          <p class="form-status" id="formStatus"></p>
+        </form>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="map reveal">
+          <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="ЗАО Урсус на карте"
+            src="https://www.google.com/maps?q=Temen-Suu,+Moskovsky+District,+Chuy+Region,+Kyrgyzstan&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a href="index.html" class="brand"><img class="mark" src="images/logo.png" alt="URSUS" /> <span>URSUS<small>Темен Суу · с 1940</small></span></a>
+          <p style="margin-top:12px" data-i18n="foot.tagline"></p>
+        </div>
+        <div>
+          <h4 data-i18n="foot.nav">Навигация</h4>
+          <ul>
+            <li><a href="catalog.html" data-i18n="nav.catalog">Каталог</a></li>
+            <li><a href="about.html" data-i18n="nav.about">О заводе</a></li>
+            <li><a href="news.html" data-i18n="nav.news">Новости</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">Контакты</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="foot.products">Продукция</h4>
+          <ul>
+            <li><a href="catalog.html">Голландский сыр</a></li>
+            <li><a href="catalog.html">Костромской · Пошехонский</a></li>
+            <li><a href="catalog.html">Масло сливочное</a></li>
+            <li><a href="catalog.html">Молоко и сливки</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="foot.contacts">Контакты</h4>
+          <ul>
+            <li><a href="tel:+996312453562">+996 (312) 45-35-62</a></li>
+            <li><a href="mailto:zaoursus2003@gmail.com">zaoursus2003@gmail.com</a></li>
+            <li>с. Темен-Суу, Чуйская обл.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <small>© <span id="year">2026</span> <span data-i18n="foot.rights">ЗАО «Урсус». Все права защищены.</span></small>
+        <small data-i18n="foot.madein">Сделано в Кыргызстане 🇰🇬</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script>
+    /* Contact form — submits to Web3Forms if a key is set, else falls back to mailto. */
+    (function () {
+      const form = document.getElementById("contactForm");
+      const status = document.getElementById("formStatus");
+      if (!form) return;
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const key = form.access_key.value;
+        const T = window.URSUS ? window.URSUS.t : (k) => k;
+        const data = {
+          name: form.name.value, contact: form.contact.value, message: form.message.value
+        };
+        if (!key || key.indexOf("YOUR-") === 0) {
+          // No key yet → open the visitor's mail client as a fallback.
+          const body = encodeURIComponent(`${data.name} (${data.contact}):\n\n${data.message}`);
+          window.location.href = `mailto:zaoursus2003@gmail.com?subject=Заявка с сайта&body=${body}`;
+          return;
+        }
+        status.textContent = "…"; status.className = "form-status";
+        try {
+          const res = await fetch("https://api.web3forms.com/submit", {
+            method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify(Object.fromEntries(new FormData(form)))
+          });
+          const json = await res.json();
+          if (json.success) { status.textContent = T("cont.fOk"); status.className = "form-status ok"; form.reset(); }
+          else throw new Error(json.message);
+        } catch (err) {
+          status.textContent = T("cont.fErr"); status.className = "form-status err";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

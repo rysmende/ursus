@@ -1,6 +1,12 @@
 # Local scratch / image-candidate working area (not for deploy)
 cand/
 
+# Raw source assets & company documents — kept LOCAL only, never deployed.
+# (the resume .docx holds bank details; certificates & 400+ raw photos are private)
+# data/DATA.md (the asset map) stays tracked.
+data/*
+!data/DATA.md
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

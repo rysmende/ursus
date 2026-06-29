@@ -1,30 +1,54 @@
 # ursus.kg
 
-Single-page website for **ЗАО «Урсус»** — a cheese factory in the village of Temen-Suu,
-Moskovsky District, Chui Region, Kyrgyzstan. Founded in 1940; the brand is the polar bear
-(Latin *Ursus*). Produces natural cheese, butter, milk and cream — no vegetable fats.
+Website for **ЗАО «Урсус» / JSC URSUS** — a cheese factory in the village of Temen-Suu,
+Moskovsky District, Chui Region, Kyrgyzstan. The plant dates to **1940** (printed on every
+pack), and the joint-stock company has run the business since **1999**. The brand is the
+polar bear (Latin *Ursus*); products also carry the trademark **«Темен Суу» / "Temen Suu"**.
+Natural cheese, butter, milk and cream — **no vegetable fats**.
 
-Hosted on Cloudflare Pages. Every push to `main` triggers an automatic deploy.
+A bright, modern, **multi-page static site** (turquoise theme). No build step — every push to
+`main` auto-deploys on **Cloudflare Pages**.
 
-## Features
-- Trilingual interface — **Russian / Kyrgyz / English** (in-page switcher, no reload)
-- Dark wood-themed design with a product catalog (Cheese / Butter / Dairy filters)
-- Scroll-driven 3D cheese wheel as an ambient background (Three.js, with a photo fallback)
-- Sections: hero, catalog, about, quality, contact (with map)
+## Pages
+| File | Purpose |
+|---|---|
+| `index.html` | Home — hero, trust marquee, featured products, quality, about teaser, CTA |
+| `catalog.html` | Full product catalog with category filters |
+| `about.html` | Company story, numbers, certificates, partners |
+| `news.html` | News / blog index |
+| `news/*.html` | SEO articles (cheese guide, "no vegetable fats", ISO 22000 news) |
+| `contact.html` | Contacts, working form (Web3Forms), map |
+| `404.html` | Branded not-found page |
 
-## Real company data baked in
-- **Address:** Chui Region, Moskovsky District, Temen-Suu village, Syrzavodskaya St 3
-- **Reception:** +996 (312) 45-35-62 · **Sales:** +996 772 54-69-06 (WhatsApp +996 554 05-89-49)
-- **Email:** info@ursus.kg
-- **Cheeses:** Gollandsky (+ Classic/Creamy), Poshekhonsky, Kostromskoy, Rizhsky, Altaysky,
-  Edam, Temensuysky (signature), smoked Kolbasny; plus Krestyanskoe butter, drinking milk, cream
-- Capacity ~30 t/day, 70+ staff, Halal-certified, sold in Kyrgyzstan and Kazakhstan
+## Shared assets
+- `assets/css/site.css` — design system (turquoise palette, components, animations, responsive)
+- `assets/js/site.js` — i18n engine (RU/KY/EN, persisted in `localStorage`), nav, scroll reveals,
+  count-up, catalog rendering
+- `assets/js/products.js` — the product catalog data (trilingual), driven by the real SKUs
+- `images/` — web-optimised assets: `logo.png`, product cutouts `p-*.png` (transparent PNG),
+  and lifestyle/section photos (`hero-board`, `life-*`, `about-board`, `cut-interior`, `assortment`, `banner-row`)
 
-## Files
-- `index.html` — the entire site (single static page, embedded CSS + JS)
-- `images/` — real URSUS assets recovered from the original ursus.kg (logo, product photos)
-  plus a few generic dairy stand-ins (`milk.jpg`, `butter.jpg`, `cream.jpg`, `factory.jpg`)
+## SEO
+- Per-page `<title>`, meta description, canonical, OpenGraph/Twitter tags
+- JSON-LD: `Organization` (home) and `Article` (each post)
+- `sitemap.xml`, `robots.txt`, `_headers` (caching + security headers for Cloudflare Pages)
 
-## Notes
-- Real per-cheese photos are limited; some cards reuse a handful of authentic cheese shots.
-- No prices are shown (the factory works wholesale; pricing is via the sales department).
+## Real company data (verified from official docs — see `data/DATA.md`)
+- **Address:** Чуйская обл., Московский р-н, с. Темен-Суу, ул. Сырзаводская 3 (724614)
+- **Reception:** +996 (312) 45-35-62 · **Sales:** +996 772 54-69-21 · **Accounting:** +996 (3131) 5-87-50
+- **Email:** zaoursus2003@gmail.com · INN 02503200310189
+- **Capacity:** up to 60 t milk/day · **Staff:** 63 + 80 suppliers
+- **Certs:** ISO 22000:2018 (SGS, to 2027), Halal (TM «Темен Суу»), HACCP; Honorary Diploma of KR (2017)
+- **Cheeses:** Голландский (Классический / Сливочный / Элитный / Темен-Сууйский Элитный),
+  Сметанковый, Теменсуйский, Рижский, Эдам, Алтайский, Костромской, Пошехонский, Просто Сыр,
+  Колбасный копчёный; plus butter (72.5 / 82.5%), milk and cream (20/30/40%)
+- **Exports:** Kazakhstan, Russia (EAEU)
+
+## Notes / TODO
+- The contact form uses **Web3Forms** — set a real `access_key` in `contact.html`
+  (free at web3forms.com) to receive submissions; until then it falls back to opening the
+  visitor's mail app.
+- News articles are written in Russian (the core RU/KY/EN switch covers all site chrome,
+  catalog, home, about and contact).
+- Source assets & company documents live in `data/` and are **git-ignored** (they include
+  bank details and 400+ raw photos — never deployed). Only `data/DATA.md` (the asset map) is tracked.
