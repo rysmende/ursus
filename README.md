@@ -45,9 +45,11 @@ A bright, modern, **multi-page static site** (turquoise theme). No build step �
 - **Exports:** Kazakhstan, Russia (EAEU)
 
 ## Notes / TODO
-- The contact form uses **Web3Forms** — set a real `access_key` in `contact.html`
-  (free at web3forms.com) to receive submissions; until then it falls back to opening the
-  visitor's mail app.
+- The contact form posts to **FormSubmit.co** (`assets/js/contact.js`) → `zaoursus2003@gmail.com`.
+  The first-ever submission triggers a one-time activation email to that inbox; click it once
+  and all later messages are delivered directly. Falls back to a `mailto:` if the request fails.
+- **Security headers** (`_headers`): strict CSP, `frame-ancestors 'none'`, HSTS, Permissions-Policy.
+  If you add a new external resource, update the CSP allow-list accordingly.
 - News articles are written in Russian (the core RU/KY/EN switch covers all site chrome,
   catalog, home, about and contact).
 - Source assets & company documents live in `data/` and are **git-ignored** (they include
