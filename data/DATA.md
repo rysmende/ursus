@@ -93,24 +93,34 @@ All studio shots are bright white-background pack shots (ideal for transparent-P
 The `Урсус фото продукции` set has additional styled lifestyle frames. **No factory, worker,
 or cream (сливки) photos exist anywhere in the data.**
 
-### Product tiles → copied to `images/` (white-bg cutouts → transparent PNG)
-| Product | Source file | Output |
+### Product tiles → `images/p-<id>-N.png` (white-bg cutouts → transparent PNG; gallery sets)
+**Corrected mapping** — verified by reading each pack label directly (the first agent
+survey was off by one). First image is the card thumbnail; extra images form the gallery.
+
+| Product | Source file(s) | Output(s) |
 |---|---|---|
-| Голландский Классический | `Catalog/_MG_4017.jpg` | `p-gollandsky-klass.png` |
-| Голландский Сливочный | `Catalog/_MG_4015.jpg` | `p-gollandsky-sliv.png` |
-| Голландский Элитный | `Catalog/_MG_4025.jpg` | `p-gollandsky-elite.png` |
-| Сметанковый | `фото продукции/1K5A2483.jpg` | `p-smetankovy.png` |
-| Теменсуйский (signature) | `Catalog/_MG_4018.jpg` | `p-temensuysky.png` |
-| Рижский | `Catalog/_MG_4019.jpg` | `p-rizhsky.png` |
-| Эдам | `Catalog/_MG_4020.jpg` | `p-edam.png` |
-| Алтайский | `Catalog/_MG_4021.jpg` | `p-altaysky.png` |
-| Костромской (cut wheel) | `Catalog/_MG_4092.jpg` | `p-kostromskoy.png` |
-| Пошехонский (cut wheel) | `Catalog/_MG_4090.jpg` | `p-poshehonsky.png` |
-| Просто Сыр (red) | `Catalog/_MG_4023.jpg` | `p-prosto-red.png` |
-| Просто Сыр (green) | `Catalog/_MG_4024.jpg` | `p-prosto-green.png` |
-| Колбасный (smoked) | `Catalog/_MG_4037.jpg` | `p-kolbasny.png` |
-| Масло Крестьянское | `Catalog/_MG_4051.jpg` | `p-butter.png` |
-| Молоко 1 л | `фото продукции/1K5A2470.jpg` | `p-milk.png` |
+| Голландский классический | `_MG_4028` (pouch), `_MG_4016` (block) | `p-gollandsky-klass-1/2.png` |
+| Голландский сливочный | `_MG_4015` (block), `_MG_4027` (pouch) | `p-gollandsky-sliv-1/2.png` |
+| Голландский Элитный | `_MG_4025` | `p-gollandsky-elite-1.png` |
+| Сметанковый | `1K5A2483` (yellow), `1K5A2566` (red) | `p-smetankovy-1/2.png` |
+| Теменсуйский (signature) | `_MG_4017` | `p-temensuysky-1.png` |
+| Рижский | `_MG_4018` | `p-rizhsky-1.png` |
+| Эдам | `_MG_4019` | `p-edam-1.png` |
+| Алтайский | `_MG_4020` | `p-altaysky-1.png` |
+| Костромской | `_MG_4092` (cut), `_MG_4074` (whole), `_MG_4022` (wedge) | `p-kostromskoy-1/2/3.png` |
+| Пошехонский | `_MG_4090` (cut), `_MG_4076` (whole), `_MG_4023` (wedge) | `p-poshehonsky-1/2/3.png` |
+| Просто Сыр (red) | `_MG_4021` | `p-prosto-red-1.png` |
+| Просто Сыр (green) | `_MG_4024` | `p-prosto-green-1.png` |
+| Колбасный (smoked) | `_MG_4037` | `p-kolbasny-1.png` |
+| Масло Крестьянское | `_MG_4051`, `_MG_4053` (pair) | `p-butter-1/2.png` |
+| Молоко 1 л | `1K5A2470` | `p-milk-1.png` |
+
+> Catalog cards show the first image with a `📷 N` badge when a gallery exists; clicking
+> opens a lightbox (arrows/thumbnails/Esc). Label→file truth table for blocks:
+> 4015=Голл.сливочный · 4016=Голландский · 4017=Теменсуйский · 4018=Рижский · 4019=Эдам ·
+> 4020=Алтайский · 4021=ПростоСыр(red) · 4022=Костромской(wedge) · 4023=Пошехонский(wedge) ·
+> 4024=ПростоСыр(green) · 4025=Голл.Элитный · 4028=Голл.классический. Wheels: 4074/4079=Костромской,
+> 4076/4077=Пошехонский; cut 4090/4095=Пошехонский, 4092/4093=Костромской.
 
 ### Lifestyle / hero / section images (resized JPG, keep background)
 | Use | Source | Output |

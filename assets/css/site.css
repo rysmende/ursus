@@ -201,6 +201,37 @@ header.site.scrolled { border-bottom-color: var(--line); box-shadow: 0 10px 30px
 .card:hover .ph img { transform: scale(1.06); }
 .card .tag { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,.92); color: var(--teal-700); font-size: 12px; font-weight: 800; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); }
 .card .tag.hot { background: var(--coral); color: #fff; border-color: transparent; }
+.card .ph[data-gallery] { cursor: zoom-in; }
+.card .gal-badge { position: absolute; top: 12px; right: 12px; background: rgba(8,40,45,.78); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 9px; border-radius: 999px; backdrop-filter: blur(4px); }
+.card .zoom { position: absolute; bottom: 12px; right: 12px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.92); display: grid; place-items: center; font-size: 14px; opacity: 0; transform: translateY(6px); transition: opacity .2s, transform .2s; box-shadow: var(--shadow-sm); }
+.card:hover .zoom { opacity: 1; transform: none; }
+
+/* ---------- Lightbox ---------- */
+.lightbox { position: fixed; inset: 0; z-index: 200; display: grid; grid-template-columns: 64px 1fr 64px; grid-template-rows: 1fr auto; background: rgba(6,30,34,.92); backdrop-filter: blur(8px); animation: lbfade .2s ease; }
+.lightbox[hidden] { display: none; }
+@keyframes lbfade { from { opacity: 0; } to { opacity: 1; } }
+.lb-stage { grid-column: 2; grid-row: 1; display: grid; place-items: center; padding: 24px; min-height: 0; }
+.lb-stage img { max-width: 100%; max-height: 72vh; object-fit: contain; filter: drop-shadow(0 24px 40px rgba(0,0,0,.5)); animation: lbpop .25s ease; }
+.lb-stage img.cover { border-radius: var(--radius); }
+@keyframes lbpop { from { transform: scale(.96); opacity: .4; } to { transform: none; opacity: 1; } }
+.lb-close { grid-column: 3; grid-row: 1; align-self: start; justify-self: end; margin: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.14); color: #fff; font-size: 26px; line-height: 1; cursor: pointer; transition: background .2s; }
+.lb-close:hover { background: rgba(255,255,255,.26); }
+.lb-nav { grid-row: 1; align-self: center; justify-self: center; width: 50px; height: 50px; border: 0; border-radius: 50%; background: rgba(255,255,255,.14); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; transition: background .2s, transform .15s; }
+.lb-nav:hover { background: rgba(255,255,255,.28); transform: scale(1.08); }
+.lb-prev { grid-column: 1; } .lb-next { grid-column: 3; }
+.lb-bar { grid-column: 1 / -1; grid-row: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 12px 20px 26px; color: #fff; }
+.lb-title { font-family: "Unbounded"; font-weight: 700; font-size: 17px; }
+.lb-count { font-size: 13px; color: var(--mint); font-weight: 700; }
+.lb-thumbs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.lb-thumb { width: 62px; height: 62px; border: 2px solid transparent; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,.92); cursor: pointer; padding: 4px; transition: border-color .2s; }
+.lb-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.lb-thumb.on { border-color: var(--aqua); }
+@media (max-width: 560px) {
+  .lightbox { grid-template-columns: 44px 1fr 44px; }
+  .lb-nav { width: 40px; height: 40px; font-size: 24px; }
+  .lb-stage { padding: 12px; }
+  .lb-stage img { max-height: 64vh; }
+}
 .card .body { padding: 17px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .card h3 { font-family: "Manrope"; font-weight: 800; font-size: 18px; color: var(--head); }
 .card .desc { color: var(--muted); font-size: 14px; flex: 1; }

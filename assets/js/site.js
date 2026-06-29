@@ -276,16 +276,21 @@
     const cls = p.badge === "smoked" || p.badge === "premium" || p.badge === "signature" || p.badge === "hit" ? "hot" : "";
     return `<span class="tag ${cls}">${window.BADGES[p.badge][lang]}</span>`;
   }
+  function imgsOf(p) { return (p.imgs && p.imgs.length) ? p.imgs : [p.img]; }
   function cardHtml(p, i) {
     const cls = p.imgCover ? "" : "cut";
+    const imgs = imgsOf(p);
     const pills = [];
     if (p.fat) pills.push(`<span class="pill gold">${t("cat.fat")} ${p.fat}</span>`);
     if (p.shelf) pills.push(`<span class="pill">${t("cat.shelf")} ${p.shelf} ${t("cat.days")}</span>`);
+    const gal = imgs.length > 1 ? `<span class="gal-badge" aria-hidden="true">📷 ${imgs.length}</span>` : "";
     return `
       <article class="card reveal" style="transition-delay:${Math.min(i * 45, 300)}ms">
-        <div class="ph">
-          <img src="images/${p.img}" class="${cls}" alt="${p.name[lang]}" loading="lazy" width="600" height="450" />
+        <div class="ph" data-gallery="${p.id}" role="button" tabindex="0" aria-label="${p.name[lang]}">
+          <img src="images/${imgs[0]}" class="${cls}" alt="${p.name[lang]}" loading="lazy" width="600" height="450" />
           ${badgeHtml(p)}
+          ${gal}
+          <span class="zoom" aria-hidden="true">🔍</span>
         </div>
         <div class="body">
           <h3>${p.name[lang]}</h3>
@@ -353,6 +358,68 @@
     entries.forEach(e => { if (e.isIntersecting) { countUp(); countObserver.unobserve(e.target); } });
   }, { threshold: 0.4 });
 
+  /* ---------------- Gallery lightbox ---------------- */
+  let lb = null, lbState = { imgs: [], i: 0, cover: false };
+  function buildLightbox() {
+    if (lb) return;
+    lb = document.createElement("div");
+    lb.className = "lightbox"; lb.hidden = true;
+    lb.innerHTML =
+      '<button class="lb-close" aria-label="Закрыть">×</button>' +
+      '<button class="lb-nav lb-prev" aria-label="Назад">‹</button>' +
+      '<figure class="lb-stage"><img id="lbImg" alt="" /></figure>' +
+      '<button class="lb-nav lb-next" aria-label="Вперёд">›</button>' +
+      '<div class="lb-bar"><span class="lb-title" id="lbTitle"></span>' +
+      '<span class="lb-count" id="lbCount"></span><div class="lb-thumbs" id="lbThumbs"></div></div>';
+    document.body.appendChild(lb);
+    lb.querySelector(".lb-close").onclick = closeGallery;
+    lb.querySelector(".lb-prev").onclick = () => step(-1);
+    lb.querySelector(".lb-next").onclick = () => step(1);
+    lb.addEventListener("click", e => { if (e.target === lb) closeGallery(); });
+    addEventListener("keydown", e => {
+      if (lb.hidden) return;
+      if (e.key === "Escape") closeGallery();
+      else if (e.key === "ArrowLeft") step(-1);
+      else if (e.key === "ArrowRight") step(1);
+    });
+  }
+  function renderLB() {
+    const { imgs, i, cover } = lbState;
+    const img = lb.querySelector("#lbImg");
+    img.src = "images/" + imgs[i];
+    img.className = cover ? "cover" : "";
+    lb.querySelector("#lbCount").textContent = imgs.length > 1 ? (i + 1) + " / " + imgs.length : "";
+    const multi = imgs.length > 1;
+    lb.querySelector(".lb-prev").style.display = multi ? "" : "none";
+    lb.querySelector(".lb-next").style.display = multi ? "" : "none";
+    const tw = lb.querySelector("#lbThumbs");
+    tw.innerHTML = multi ? imgs.map((s, k) =>
+      `<button class="lb-thumb ${k === i ? "on" : ""}" data-k="${k}"><img src="images/${s}" alt="" /></button>`).join("") : "";
+    tw.querySelectorAll(".lb-thumb").forEach(b => b.onclick = () => { lbState.i = +b.dataset.k; renderLB(); });
+  }
+  function step(d) { lbState.i = (lbState.i + d + lbState.imgs.length) % lbState.imgs.length; renderLB(); }
+  function openGallery(pid) {
+    const p = window.PRODUCTS && window.PRODUCTS.find(x => x.id === pid);
+    if (!p) return;
+    buildLightbox();
+    lbState = { imgs: imgsOf(p), i: 0, cover: !!p.imgCover };
+    lb.querySelector("#lbTitle").textContent = p.name[lang];
+    renderLB();
+    lb.hidden = false; document.body.style.overflow = "hidden";
+  }
+  function closeGallery() { if (lb) { lb.hidden = true; document.body.style.overflow = ""; } }
+  function initGallery() {
+    document.addEventListener("click", e => {
+      const ph = e.target.closest("[data-gallery]");
+      if (ph) openGallery(ph.getAttribute("data-gallery"));
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const ph = document.activeElement && document.activeElement.closest && document.activeElement.closest("[data-gallery]");
+      if (ph) { e.preventDefault(); openGallery(ph.getAttribute("data-gallery")); }
+    });
+  }
+
   /* ---------------- Header + mobile menu ---------------- */
   function initChrome() {
     const header = document.getElementById("header");
@@ -369,6 +436,7 @@
   /* ---------------- Init ---------------- */
   function init() {
     initChrome();
+    initGallery();
     applyI18n();
     renderFilters();
     renderCatalog();

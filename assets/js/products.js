@@ -1,13 +1,13 @@
 /* ============================================================
    URSUS — product catalog (real ЗАО «Урсус» / TM «Темен Суу» line)
    Shared by index.html (featured) and catalog.html (full grid).
-   Each product: id, cat, img (transparent cutout), badge, fat, shelf, weight,
-   name{ru,ky,en}, desc{ru,ky,en}
+   imgs[] = gallery (first image is the card thumbnail). imgCover = photo
+   that fills the frame instead of a transparent cutout.
    ============================================================ */
 window.PRODUCTS = [
   /* ---------------- CHEESE ---------------- */
   {
-    id: "gollandsky-klass", cat: "cheese", img: "p-gollandsky-klass.png",
+    id: "gollandsky-klass", cat: "cheese", imgs: ["p-gollandsky-klass-1.png", "p-gollandsky-klass-2.png"],
     badge: "hit", fat: "45%", shelf: "90",
     name: { ru: "Голландский классический", ky: "Голландия классикалык", en: "Gollandsky Classic" },
     desc: {
@@ -17,7 +17,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "gollandsky-sliv", cat: "cheese", img: "p-gollandsky-sliv.png",
+    id: "gollandsky-sliv", cat: "cheese", imgs: ["p-gollandsky-sliv-1.png", "p-gollandsky-sliv-2.png"],
     badge: "hit", fat: "45%", shelf: "90",
     name: { ru: "Голландский сливочный", ky: "Голландия сливкалуу", en: "Gollandsky Creamy" },
     desc: {
@@ -27,7 +27,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "gollandsky-elite", cat: "cheese", img: "p-gollandsky-elite.png",
+    id: "gollandsky-elite", cat: "cheese", imgs: ["p-gollandsky-elite-1.png"],
     badge: "premium", fat: "50%", shelf: "90",
     name: { ru: "Голландский Элитный", ky: "Голландия Элиталык", en: "Gollandsky Elite" },
     desc: {
@@ -37,7 +37,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "smetankovy", cat: "cheese", img: "p-smetankovy.png",
+    id: "smetankovy", cat: "cheese", imgs: ["p-smetankovy-1.png", "p-smetankovy-2.png"],
     badge: "", fat: "50%", shelf: "90",
     name: { ru: "Сметанковый", ky: "Сметанковый", en: "Smetankovy" },
     desc: {
@@ -47,7 +47,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "temensuysky", cat: "cheese", img: "p-temensuysky.png",
+    id: "temensuysky", cat: "cheese", imgs: ["p-temensuysky-1.png"],
     badge: "signature", fat: "45%", shelf: "90",
     name: { ru: "Теменсуйский", ky: "Темен-Суу сыры", en: "Temensuysky" },
     desc: {
@@ -57,7 +57,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "rizhsky", cat: "cheese", img: "p-rizhsky.png",
+    id: "rizhsky", cat: "cheese", imgs: ["p-rizhsky-1.png"],
     badge: "", fat: "45%", shelf: "90",
     name: { ru: "Рижский", ky: "Рига сыры", en: "Rizhsky" },
     desc: {
@@ -67,7 +67,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "edam", cat: "cheese", img: "p-edam.png",
+    id: "edam", cat: "cheese", imgs: ["p-edam-1.png"],
     badge: "", fat: "45%", shelf: "90",
     name: { ru: "Эдам", ky: "Эдам сыры", en: "Edam" },
     desc: {
@@ -77,7 +77,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "altaysky", cat: "cheese", img: "p-altaysky.png",
+    id: "altaysky", cat: "cheese", imgs: ["p-altaysky-1.png"],
     badge: "", fat: "50%", shelf: "120",
     name: { ru: "Алтайский", ky: "Алтай сыры", en: "Altaysky" },
     desc: {
@@ -87,7 +87,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "kostromskoy", cat: "cheese", img: "p-kostromskoy.png",
+    id: "kostromskoy", cat: "cheese", imgs: ["p-kostromskoy-1.png", "p-kostromskoy-2.png", "p-kostromskoy-3.png"],
     badge: "", fat: "45%", shelf: "90",
     name: { ru: "Костромской", ky: "Кострома сыры", en: "Kostromskoy" },
     desc: {
@@ -97,7 +97,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "poshehonsky", cat: "cheese", img: "p-poshehonsky.png",
+    id: "poshehonsky", cat: "cheese", imgs: ["p-poshehonsky-1.png", "p-poshehonsky-2.png", "p-poshehonsky-3.png"],
     badge: "", fat: "45%", shelf: "90",
     name: { ru: "Пошехонский", ky: "Пошехон сыры", en: "Poshekhonsky" },
     desc: {
@@ -107,7 +107,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "prosto-red", cat: "cheese", img: "p-prosto-red.png",
+    id: "prosto-red", cat: "cheese", imgs: ["p-prosto-red-1.png"],
     badge: "", fat: "45%", shelf: "90",
     name: { ru: "Просто Сыр (красный)", ky: "Просто Сыр (кызыл)", en: "Prosto Syr (red)" },
     desc: {
@@ -117,7 +117,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "prosto-green", cat: "cheese", img: "p-prosto-green.png",
+    id: "prosto-green", cat: "cheese", imgs: ["p-prosto-green-1.png"],
     badge: "", fat: "45%", shelf: "90",
     name: { ru: "Просто Сыр (зелёный)", ky: "Просто Сыр (жашыл)", en: "Prosto Syr (green)" },
     desc: {
@@ -127,7 +127,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "kolbasny", cat: "cheese", img: "p-kolbasny.png",
+    id: "kolbasny", cat: "cheese", imgs: ["p-kolbasny-1.png"],
     badge: "smoked", fat: "40%", shelf: "75",
     name: { ru: "Колбасный копчёный", ky: "Ысталган колбаса сыр", en: "Smoked Sausage Cheese" },
     desc: {
@@ -138,7 +138,7 @@ window.PRODUCTS = [
   },
   /* ---------------- BUTTER ---------------- */
   {
-    id: "butter", cat: "butter", img: "p-butter.png",
+    id: "butter", cat: "butter", imgs: ["p-butter-1.png", "p-butter-2.png"],
     badge: "hit", fat: "72.5%", shelf: "35",
     name: { ru: "Масло Крестьянское", ky: "Дыйкан сары майы", en: "Krestyanskoe Butter" },
     desc: {
@@ -149,7 +149,7 @@ window.PRODUCTS = [
   },
   /* ---------------- DAIRY ---------------- */
   {
-    id: "milk", cat: "dairy", img: "p-milk.png",
+    id: "milk", cat: "dairy", imgs: ["p-milk-1.png"],
     badge: "", fat: "3.2%", shelf: "",
     name: { ru: "Молоко питьевое", ky: "Ичүүчү сүт", en: "Drinking Milk" },
     desc: {
@@ -159,7 +159,7 @@ window.PRODUCTS = [
     }
   },
   {
-    id: "cream", cat: "dairy", img: "life-milk.jpg", imgCover: true,
+    id: "cream", cat: "dairy", imgs: ["life-milk.jpg"], imgCover: true,
     badge: "", fat: "20–40%", shelf: "",
     name: { ru: "Сливки пастеризованные", ky: "Пастеризацияланган каймак", en: "Pasteurized Cream" },
     desc: {
